@@ -25,12 +25,6 @@ export const AltaUser = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (values: any) => {
-
-        alert('Usuario creado con éxito');
-        navigate('/Login')
-        console.log(values);
-    }
     const handleCancel = () => {
         console.log("Cancel");
         navigate('/');
@@ -48,8 +42,20 @@ export const AltaUser = () => {
                     repeatPassword: ''
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={values => {
-                    console.log(values);
+                onSubmit={(values, { setSubmitting }) => {
+                    console.log('Valores enviados, value:', values);
+                    // Guardar los datos del usuario en localStorage
+                    const userData = {
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                        password: values.password,
+                    };
+                    console.log('valores guardados en el local Storage , userData:', userData);
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    alert('Usuario creado con éxito');
+                    navigate('/Login');
+                    setSubmitting(false);
                 }}
             >
                 {({errors, touched}) => (
@@ -86,7 +92,8 @@ export const AltaUser = () => {
                             {errors.password && touched.password ? <div>{errors.password}</div> : null}
                         </div>
                         <div className="btn m-2 p-2">
-                            <button onClick={handleSubmit}  type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary"
+                            >Submit</button>
                             <button
                                 onClick= {handleCancel }
                                 type="submit"

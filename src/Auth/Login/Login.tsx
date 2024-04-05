@@ -1,10 +1,10 @@
 import {Formik, Field, Form} from 'formik';
 import * as Yup from 'yup';
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../../components/auth/context/AuthContext.tsx";
 
 const LoginSchema = Yup.object().shape({
-
     email: Yup.string()
         .required('Este campo es requerido')
         .email('Invalid email address'),
@@ -14,27 +14,47 @@ const LoginSchema = Yup.object().shape({
         .required('El password es requerido y tiene que tener un minimo de 8 caracteres y un maximo de 10'),
 });
 
-const validateEmail = (values: string) => {
+const validateEmail = (value: string) => {
+    const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
+    const storedEmail = userLocalStorage.email;
     let error;
-    if (!values) {
+
+    if (!value) {
         error = 'Este campo es requerido';
-    } else if (values === 'cotito@cotito.com.ar') {
-        error = `Welcome ${values}`;
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values)) {
-        error = 'Invalid email address';
+    } else if (value !== storedEmail) {
+        error = 'El correo electrónico ingresado no coincide';
     }
+
     return error;
-}
+};
 
 export const LoginForm = () => {
-
+    // @ts-ignore
+    const { dataUser, setDataUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const [attempts, setAttempts] = useState(3);
     const [isLoggedIn, setIsLogged] = useState(false);
 
-    const handleLogin = (values: { email: string; password: string; }) => {
+    useEffect(() => {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user') || 'null');
+        if (userLocalStorage) {
+            setDataUser(userLocalStorage);
+        }
+        setIsLogged(true);
+        setDataUser(userLocalStorage);
+        console.log('userLocalStorage', dataUser);
 
-        if (values.email !== 'cotito@cotito.com.ar' || values.password !== 'Admin123') {
+
+    }, [])
+
+    const handleLogin = (values: { email: string; password: string }) => {
+        // Obtener los datos del usuario almacenados en localStorage
+        const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
+        const storedEmail = userLocalStorage.email;
+        const storedPassword = userLocalStorage.password;
+
+        // Comparar los valores ingresados en el formulario con los almacenados en localStorage
+        if (values.email !== storedEmail || values.password !== storedPassword) {
             setAttempts(attempts - 1);
 
             if (attempts === 1) {
@@ -47,9 +67,24 @@ export const LoginForm = () => {
             }
         } else {
             setIsLogged(true);
+            alert('Has iniciado sesión con éxito');
             navigate('/Page1', { replace: true });
             console.log(values);
         }
+    };
+
+    const validatePassword = (value: string) => {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
+        const storedPassword = userLocalStorage.password;
+        let error;
+
+        if (!value) {
+            error = 'Este campo es requerido';
+        } else if (value !== storedPassword) {
+            error = 'La contraseña ingresada no es válida';
+        }
+
+        return error;
     };
 
     const handleLogOut = () => {
@@ -58,56 +93,62 @@ export const LoginForm = () => {
         navigate('/');
     };
 
-    const validatePassword = (values: string | any[]) => {
-        let error;
-        if (!values) {
-            error = 'Este campo es requerido';
-        } else if (values === 'Admin123') {
-            error = `Well done `;
-            alert('Bienvenido');
-            navigate('/Page1');
-        }
-        return error;
-    }
-
     return (
         <div className="container">
             <h1>Login</h1>
             <Formik
                 initialValues={{
+                    firstName: '',
+                    lastName: '',
                     email: '',
                     password: '',
+                    repeatPassword: ''
                 }}
                 validationSchema={LoginSchema}
-                onSubmit={handleLogin}
+                onSubmit={(values, { setSubmitting }) => {
+                    console.log('Submitted values:', values);
+                    const userData = {
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                    };
+                    localStorage.setItem('user', JSON.stringify(userData));
+                    alert('Usuario creado con éxito');
+                    navigate('/Login');
+                    setSubmitting(false);
+                }}
             >
                 {({errors, touched}) => (
                     <Form>
                         <div className="mb-3 row">
                             <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
-                            <Field name="email" type="email" validate={validateEmail}/>
+                            <Field name="email" type="email" validate ={validateEmail} />
                             {errors.email && touched.email ? (
                                 <div>{errors.email}</div>
                             ) : null}
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
-                            <Field name="password" type="password" validate={validatePassword}/>
+                            <Field name="password" type="password" validate ={validatePassword}/>
                             {errors.password && touched.password ? <div>{errors.password}</div> : null}
                         </div>
                         <div className={"container"}>
                             {/* muestra un párrafo que indica el número de intentos restantes*/}
                             {attempts > 0 ? <p>Intentos restantes: {attempts}</p> : <p>Intentos restantes: 0</p>}
                             <button
-                                onClick={() => isLoggedIn ? handleLogOut : () => handleLogin}
+                                onClick={isLoggedIn ? handleLogOut : (values) => handleLogin(values)}
                                 type="submit"
                                 className="btn btn-outline-secondary m-2">{isLoggedIn ? 'Logout' : 'Login'}
                             </button>
-
-                            <button onClick={() => {
-                                navigate('/');
-                            }} type="button" className="btn btn-outline-secondary m-2">Cancel
+                            <button
+                                onClick={() => {
+                                    navigate('/');
+                                }}
+                                type="button"
+                                className="btn btn-outline-secondary m-2">
+                                Cancel
                             </button>
+
                             <div>
                                 <span>You do not have an account?</span>
                                 <a href="/AltaUser">Register</a>
@@ -117,5 +158,6 @@ export const LoginForm = () => {
                 )}
             </Formik>
         </div>
+
     );
 };

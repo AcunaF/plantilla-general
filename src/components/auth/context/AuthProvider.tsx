@@ -1,7 +1,7 @@
-import {useReducer} from 'react';
+import {useReducer, useState} from 'react';
 import {AuthContext} from "./AuthContext.jsx";
 import {authReducer} from "./authReducer.js";
-import types from "../../../Auth/types/types";
+import  types   from "../../../Auth/types/types";
 
 import {useNavigate} from "react-router-dom";
 
@@ -12,18 +12,28 @@ const init = () =>  {
         user : user,
     }
 }
+/*export const dataUser ={
+    name: " facundo ",
+    surname: "acuna" ,
+    age : 42,
+    email :" facu@facu.com.ar"
+}*/
 
 // @ts-ignore
-export const AuthProvider: React.FC = ({children }) => {
+export const AuthProvider  = ({children }) => {
     const navigate = useNavigate();
 
     const [ authState, dispatch ]= useReducer( authReducer, { }, init);
 
+    const [dataUser, setDataUser] = useState({});
+
     const login =(name = " ") => {
 
+        // @ts-ignore
         const user ={
-            id: 'abc',
-            name: name
+            name: name,
+            ...dataUser,
+
         }
         const action = {
             type : types.login,
@@ -31,6 +41,7 @@ export const AuthProvider: React.FC = ({children }) => {
         }
         localStorage.setItem('user', JSON.stringify(user));
         dispatch(action);
+        console.log('user', user);
         navigate("/login");
     }
     const logout =() =>{
@@ -44,6 +55,8 @@ export const AuthProvider: React.FC = ({children }) => {
 
     return (
         <AuthContext.Provider  value={{
+            dataUser,
+            setDataUser,
             ...authState,
             login,
             logout,

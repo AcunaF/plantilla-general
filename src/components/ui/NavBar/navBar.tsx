@@ -14,11 +14,11 @@ export const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-collapse">
-                <ul className="navbar-nav ml-auto">
+                <div className="navbar-nav ml-auto">
                     <NavLink className="nav-item nav-link " to="/login">
                         Login
                     </NavLink>
-                </ul>
+                </div>
             </div>
         </nav>
     )
