@@ -13,12 +13,11 @@ const LoginSchema = Yup.object().shape({
         .max(10, 'Password must be at most 10 characters')
         .required('El password es requerido y tiene que tener un minimo de 8 caracteres y un maximo de 10'),
 });
-
+/*
 const validateEmail = (value: string) => {
     const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
     const storedEmail = userLocalStorage.email;
     let error;
-
     if (!value) {
         error = 'Este campo es requerido';
     } else if (value !== storedEmail) {
@@ -26,7 +25,7 @@ const validateEmail = (value: string) => {
     }
 
     return error;
-};
+};*/
 
 export const LoginForm = () => {
     // @ts-ignore
@@ -36,20 +35,18 @@ export const LoginForm = () => {
     const [isLoggedIn, setIsLogged] = useState(false);
 
     useEffect(() => {
-        const userLocalStorage = JSON.parse(localStorage.getItem('user') || 'null');
+        const userLocalStorage = JSON.parse(localStorage.getItem('userData') || 'null');
         if (userLocalStorage) {
             setDataUser(userLocalStorage);
         }
         setIsLogged(true);
         setDataUser(userLocalStorage);
         console.log('userLocalStorage', dataUser);
-
-
     }, [])
 
     const handleLogin = (values: { email: string; password: string }) => {
         // Obtener los datos del usuario almacenados en localStorage
-        const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
+        const userLocalStorage = JSON.parse(localStorage.getItem('userData') || '{}');
         const storedEmail = userLocalStorage.email;
         const storedPassword = userLocalStorage.password;
 
@@ -71,8 +68,9 @@ export const LoginForm = () => {
             navigate('/Page1', { replace: true });
             console.log(values);
         }
-    };
 
+    };
+/*
     const validatePassword = (value: string) => {
         const userLocalStorage = JSON.parse(localStorage.getItem('user') || '{}');
         const storedPassword = userLocalStorage.password;
@@ -85,7 +83,7 @@ export const LoginForm = () => {
         }
 
         return error;
-    };
+    };*/
 
     const handleLogOut = () => {
         alert ('La sesión ah sido cerrada con éxito');
@@ -98,45 +96,33 @@ export const LoginForm = () => {
             <h1>Login</h1>
             <Formik
                 initialValues={{
-                    firstName: '',
-                    lastName: '',
                     email: '',
-                    password: '',
-                    repeatPassword: ''
+                    password: ''
                 }}
                 validationSchema={LoginSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log('Submitted values:', values);
-                    const userData = {
-                        firstName: values.firstName,
-                        lastName: values.lastName,
-                        email: values.email,
-                    };
-                    localStorage.setItem('user', JSON.stringify(userData));
-                    alert('Usuario creado con éxito');
-                    navigate('/Login');
+                    handleLogin(values);
                     setSubmitting(false);
                 }}
             >
-                {({errors, touched}) => (
+                {({errors: {email, password}, touched}) => (
                     <Form>
                         <div className="mb-3 row">
                             <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
-                            <Field name="email" type="email" validate ={validateEmail} />
-                            {errors.email && touched.email ? (
-                                <div>{errors.email}</div>
+                            <Field name="email" type="email"  />
+                            {email && touched.email ? (
+                                <div>{email}</div>
                             ) : null}
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
-                            <Field name="password" type="password" validate ={validatePassword}/>
-                            {errors.password && touched.password ? <div>{errors.password}</div> : null}
+                            <Field name="password" type="password" />
+                            {password && touched.password ? <div>{password}</div> : null}
                         </div>
                         <div className={"container"}>
                             {/* muestra un párrafo que indica el número de intentos restantes*/}
                             {attempts > 0 ? <p>Intentos restantes: {attempts}</p> : <p>Intentos restantes: 0</p>}
                             <button
-                                onClick={isLoggedIn ? handleLogOut : (values) => handleLogin(values)}
                                 type="submit"
                                 className="btn btn-outline-secondary m-2">{isLoggedIn ? 'Logout' : 'Login'}
                             </button>

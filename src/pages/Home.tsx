@@ -14,7 +14,7 @@ export const Home = () => {
     return (
         <div>
             <h1>Home</h1>
-            <h2>Bienvenido {dataUser ? dataUser.firstName : "usuarisas"}</h2>
+            <h2>Bienvenido {dataUser ? dataUser.firstName : ''}</h2>
             <div className="">
                 <button className="btn btn-outline-secondary m-2" onClick={handleReset}>
                     Reset
