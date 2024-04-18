@@ -1,0 +1,10 @@
+.destacados{
+    justify-content: space-between;
+    margin-top: 20px;
+
+}
+
+.carousel-image {
+    max-height: 500px; /* Ajusta este valor según tus necesidades */
+    object-fit: cover; /* Esto asegura que las imágenes se redimensionen correctamente */
+}

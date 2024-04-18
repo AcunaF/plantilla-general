@@ -29,6 +29,9 @@ export const AltaUser = () => {
         console.log("Cancel");
         navigate('/');
     }
+    const handleReset = () => {
+        console.log("Reset");
+    };
 
     return (
         <div className="container">
@@ -41,9 +44,8 @@ export const AltaUser = () => {
                     password: '',
                     repeatPassword: ''
                 }}
-                validationSchema={SignupSchema}
+       //         validationSchema={SignupSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log('Valores enviados, value:', values);
                     // Guardar los datos del usuario en localStorage
                     const userData = {
                         firstName: values.firstName,
@@ -51,8 +53,8 @@ export const AltaUser = () => {
                         email: values.email,
                         password: values.password,
                     };
-                    console.log('valores guardados en el local Storage , userData:', userData);
                     localStorage.setItem('userData', JSON.stringify(userData));
+                    console.log(userData);
                     alert('Usuario creado con éxito');
                     navigate('/Login');
                     setSubmitting(false);
@@ -73,7 +75,6 @@ export const AltaUser = () => {
                             <Field name="lastName" className="form-control"/>
                             {errors.lastName && touched.lastName ? <div>{errors.lastName}</div> : null}
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <Field name="email" type="email" className="form-control"/>
@@ -92,13 +93,14 @@ export const AltaUser = () => {
                             {errors.password && touched.password ? <div>{errors.password}</div> : null}
                         </div>
                         <div className="btn m-2 p-2">
-                            <button type="submit" className="btn btn-primary"
-                            >Submit</button>
+                           <button type="submit" className="btn btn-primary m-2">Submit</button>
                             <button
                                 onClick= {handleCancel }
-                                type="submit"
+                                type="button"
                                 className="btn btn-secondary m-2">Cancel</button>
-                            <button type="reset" className="btn btn-secondary m-2">Reset</button>
+                            <button type="reset"
+                                    onClick={handleReset}
+                                    className="btn btn-secondary m-2">Reset</button>
                         </div>
                     </Form>
                 )}

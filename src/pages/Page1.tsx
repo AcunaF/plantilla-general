@@ -1,5 +1,6 @@
 import {useState} from "react";
 import './page1Style.css';
+import Accordion from "react-bootstrap/Accordion";
 
 export const Page1 = () => {
 
@@ -27,7 +28,54 @@ export const Page1 = () => {
 
     // @ts-ignore
     return (
-        <div className="container">
+
+        <div className="container-fluid mt-4 ">
+            <h1>Carousel de Fotos</h1>
+            <Accordion defaultActiveKey="0">
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>Formulario de Busqueda conectado a una api</Accordion.Header>
+                    <Accordion.Body>
+                        <h6>Programa un chatbot funcional</h6>
+                        <br/>
+                        <ul>
+                            <li>
+                                <p>Definir el propósito y la funcionalidad del chatbot:
+                                </p>
+                            </li>
+                            <li>
+                                <p>    Elige una plataforma o framework
+                                </p>
+                            </li>
+                            <li>
+                                <p>Diseñar la conversación y crear flujos de diálogo: Define los diferentes casos de uso y crea flujos de conversación para guiar al usuario a través de la interacción con el chatbot. Esto implica identificar las preguntas que el chatbot puede esperar recibir y cómo debe responder a cada una de ellas.
+                                </p>
+                            </li>
+                            <li>
+                                <p>    Desarrollar el chatbot:
+                                </p>
+                            </li>
+                            <li>
+                                Integrar el chatbot en canales de comunicación:
+
+                            </li>
+                        </ul>
+                        <br/>
+                        <h5>Requirements</h5>
+                        <hr/>
+                        <ul>
+                            <li>
+                                <p>    Probar y mejorar el chatbot:
+                                </p>
+                            </li>
+                            <li>
+                                <p>Desplegar el chatbot:</p>
+                            </li>
+
+                        </ul>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+            <br/>
             <p className="box">Counter1 :{counter1}</p>
             <p className="box">Counter2 :{counter2}</p>
             <p className="box">Counter3 :{counter3}</p>

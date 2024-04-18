@@ -1,0 +1,7 @@
+.cart-icon {
+    color: white; /* Cambia esto al color que desees */
+    font-size: 24px; /* Cambia esto al tamaño que desees */
+    margin-left: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+}

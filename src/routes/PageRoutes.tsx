@@ -1,5 +1,5 @@
 import { Route, Routes} from "react-router-dom";
-import {Home} from "../pages/Home";
+import {Home} from "../pages/Home/Home.tsx";
 import {Page1} from "../pages/Page1";
 import {Page2} from "../pages/Page2";
 import {Page3} from "../pages/Page3";
@@ -7,6 +7,15 @@ import {AltaUser} from "../pages/AltaUser.tsx";
 import {Navbar} from "../components/ui/NavBar/navBar";
 import { LoginForm} from "../Auth/Login/Login.tsx"
 import {AuthProvider} from "../components/auth/context/AuthProvider.tsx";
+import {FavoriteList} from "../components/FavoriteLIst/FavoriteList.tsx";
+import {TrakerList} from "../components/TrakerList/TrakerList.tsx";
+import {Followers} from "../components/Follower/Followers.tsx";
+import {HappinessHistory} from "../components/history/HappinessHistory.tsx";
+import {Print} from "../components/print/print.tsx";
+import {ChatBot} from "../components/ChatBot/ChatBot.tsx";
+import {Search} from "../components/Search/Search.tsx";
+import {ReactQuery} from "../pages/Query/ReactQuery.tsx";
+import {Carrito} from "../components/Carrito/Carrito.tsx";
 
 export const PageRoutes = () => {
 
@@ -20,10 +29,20 @@ export const PageRoutes = () => {
                     <Route path="Page1" element={<Page1/>}/>
                     <Route path="page2" element={<Page2/>}/>
                     <Route path="page3" element={<Page3/>}/>
+                    <Route path={"ReactQuery"} element={<ReactQuery/>}/>
                     {/*Rutas login*/}
                     <Route path="AltaUser" element={<AltaUser/>}/>
-                    <Route path="login" element={<LoginForm/>}/>
+                    <Route path={"login"} element={<LoginForm/>}/>
                     <Route path={"*"} element={<h1>Not Found</h1>}/>
+                    {/*Employe */}
+                    <Route path={"favorites"} element={<FavoriteList/>}/>
+                    <Route path={"flollowers"} element={<Followers/>}/>
+                    <Route path={"tracker"} element={<TrakerList/>}/>
+                    <Route path={"history"} element={<HappinessHistory/>}/>
+                    <Route path={"print"} element={<Print/>}/>
+                    <Route path={"bot"} element={<ChatBot/>}/>
+                    <Route path={'search'} element={<Search/>}/>
+                    <Route path={"carrito"} element={<Carrito/>}/>
                 </Routes>
             </div>
         </AuthProvider>

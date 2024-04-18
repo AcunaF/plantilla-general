@@ -1,0 +1,15 @@
+.equipo{
+    gap: normal;
+    padding: 2px;
+    margin: 2px;
+}
+.futbol{
+    font-family: 'Fira Code', monospace;
+    margin: 5px;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    max-width: 380px;
+    color: red;
+    font-size: 50px;
+}

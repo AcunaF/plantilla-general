@@ -1,0 +1,28 @@
+/* SearchModal.css */
+.modal-body {
+    overflow-y: scroll; /* Habilitar el desplazamiento vertical */
+    max-height: 600px; /* Altura máxima para el área de la conversación */
+}
+
+.message {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}
+
+.message.user {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.message.bot {
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+}
+
+.sender {
+    font-weight: bold;
+    margin-right: 5px;
+}

@@ -1,0 +1,86 @@
+.producto {
+    width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.producto:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.left {
+    width: 100%;
+    height: 200px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-size: cover;
+    background-position: center;
+}
+
+.right {
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.product {
+    margin-top: 10px;
+}
+
+.product h4 {
+    margin: 10px 0;
+}
+
+.product-grid {
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.add-to-cart {
+    background-color: #f8f9fa;
+    border: none;
+    color: #343a40;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.add-to-cart:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+.flex-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.cards {
+    grid-column: 1; /* Coloca las cards en la primera columna */
+}
+
+.Imperdible {
+    grid-column: 2 / span 2; /* Coloca el elemento Imperdible en las columnas 2 y 3 */
+}
+
+.lista {
+    grid-column: 2 / span 2; /* Coloca el elemento lista en las columnas 2 y 3 */
+}
+.product-grid {
+    grid-column: 1 / span 3; /* Coloca el elemento product-grid en las tres columnas */
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+.carousel{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
