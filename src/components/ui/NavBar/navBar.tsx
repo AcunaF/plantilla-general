@@ -7,7 +7,15 @@ import './stylesNav.css';
 import imagenLogo from '../../../assets/company/logo.jpg';
 
 export const Navbar = () => {
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     const navigate = useNavigate();
+    // @ts-ignore
     const {dataUser, setDataUser} = useContext(AuthContext);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -23,65 +31,77 @@ export const Navbar = () => {
         alert('Has cerrado sesión con éxito');
         navigate('/Home'); // Redirigir a la página de cierre de sesión
     };
-
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-            <div className="col-1 d-flex align-items-center justify-content-center">
-                <img
-                    alt="Logo"
-                    src={imagenLogo}
-                    width="50"
-                    height="50"
-                    className="rounded-circle mt-1 mb-1"
-                />
-            </div>
-            &nbsp;
-            <small>
-                <Link className="navbar-brand" to="/">Home</Link>
-            </small>
-                <div className="navbar-collapse">
-                    <div className="navbar-nav">
-                        <small>
-                            <NavLink className="nav-item nav-link" to="/Page1">Productos</NavLink>
-                        </small>
-                        <small>
-                            <NavLink className="nav-item nav-link" to="/Page3">Destacados</NavLink>
-                        </small>
-                        <small>
-                            <NavLink className="nav-item nav-link" to="/ReactQuery">Ofertas</NavLink>
-                        </small>
-                        <small className="row-col">
-                            <NavLink className="nav-item nav-link" to="/Page2">Perfil Empleado</NavLink>
-                        </small>
+                <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <div className="row d-flex align-items-center justify-content-end">
+                        <img
+                            alt="Logo"
+                            src={imagenLogo}
+                            width="50"
+                            height="50"
+                            className="rounded-circle"
+                        />
                     </div>
-                </div>
-                <div className="navbar">
-
-                    <NavLink className="nav-item nav-link" to="/carrito"><FaShoppingCart
-                        className="cart-icon"/></NavLink>
-                </div>
-                <div className="">
-                    <div className="navbar-nav ml-auto ">
-                        {isLoggedIn ? (
-                            <NavLink className="nav-item nav-link" to="/profile">
-                                {dataUser.email}
-                            </NavLink>
-                        ) : (
+                    &nbsp;
+                    <small>
+                        <Link className="navbar-brand" to="/">Home</Link>
+                    </small>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        onClick={toggleMenu}
+                    >
+                        <span className="navbar-toggler-icon" />
+                    </button>
+                    <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
+                        <div className="navbar-nav">
                             <small>
-                            <NavLink className="nav-item nav-link" to="/login">
-                                Login
-                            </NavLink>
+                                <NavLink className="nav-item nav-link" to="/Page1">Productos</NavLink>
                             </small>
-                        )}
-                        <small>
-                        {isLoggedIn && (
-                            <NavLink className="nav-item nav-link" to="/" onClick={handleLogOut}>
-                                LogOut
-                            </NavLink>
-                        )}
-                        </small>
+                            <small>
+                                <NavLink className="nav-item nav-link" to="/Page3">Destacados</NavLink>
+                            </small>
+                            <small>
+                                <NavLink className="nav-item nav-link" to="/ReactQuery">Ofertas</NavLink>
+                            </small>
+                            <div className="container-fluid">
+                                <form className="d-flex" role="search">
+                                    <input className="form-control me-4" type="search" placeholder="Search" aria-label="Search"/>
+                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-        </nav>
-)
-}
+                    <div className="navbar">
+                        <NavLink className="nav-item nav-link" to="/carrito"><FaShoppingCart className="cart-icon"/></NavLink>
+                    </div>
+                    <span>Bienvenido {dataUser ? dataUser.firstName : ''}</span>
+
+                    <div className="m-3">
+                        <div className="navbar-nav ml-auto ">
+                            {isLoggedIn ? (
+                                <NavLink className="nav-item nav-link" to="/profile">
+                                    {dataUser.email}
+                                </NavLink>
+                            ) : (
+                                <small>
+
+                                    <NavLink className="nav-item nav-link" to="/login">
+                                        Login
+                                    </NavLink>
+                                </small>
+                            )}
+                            <small>
+                                {isLoggedIn && (
+                                    <NavLink className="nav-item nav-link" to="/" onClick={handleLogOut}>
+                                        LogOut
+                                    </NavLink>
+                                )}
+                            </small>
+                        </div>
+                    </div>
+                    <ul>
+                    </ul>
+                </nav>
+    );
+};

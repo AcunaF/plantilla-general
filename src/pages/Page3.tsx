@@ -1,8 +1,10 @@
 import Accordion from "react-bootstrap/Accordion";
 import   { Equipos }  from "../components/hooks/usestate.jsx";
+import {CardsNew} from "../components/New-cards/CardsNew.tsx";
 export const Page3 = () => {
     return (
         <div>
+            <CardsNew/>
             <h1>HOOKS</h1>
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">

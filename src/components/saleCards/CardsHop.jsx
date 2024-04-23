@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBRow } from 'mdb-react-ui-kit';
-import './styles.css';
-export const Cards = () => {
-    const [data, setData] = useState([]);
+import {MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBRow} from "mdb-react-ui-kit";
+import React, {useEffect} from "react";
+import './CardsHop.css';
+
+export const CardsHop =()=> {
+    const [cardsHop, setCardsHop] = React.useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5005/api/galeriaLibro')
+        fetch(`http://localhost:5005/api/galeriaLibro`)
             .then((response) => response.json())
-            .then((dataR) => setData(dataR.items))
+            .then((dataR) => setCardsHop(dataR.items))
             .catch(err => console.log(`Error`, err));
     }, []);
 
     return (
-        <div className="product-grid">
-            {data.map((item, index) => (
-                <div key={index} className="CardWrapper">
+        <div className="row-cols-2">
+            {cardsHop.map((item, index) => (
+                <div key={index}>
                     <MDBCard style={{ maxWidth: '460px' }}>
-                        <MDBRow className="g-0">
-                            <MDBCol md="">
+                        <MDBRow className="g-1">
+                            <MDBCol>
                                 <MDBCardImage
-                                    style={{ maxWidth: '400px' }}
+                                    style={{ maxWidth: '300px' }}
                                     src={item.imagen}
                                     alt={item.id_imagen}
                                     fluid
                                 />
                             </MDBCol>
-                            <MDBCol md="8">
+                            <MDBCol md="10">
                                 <MDBCardBody>
                                     <MDBCardTitle>{item.categoria}</MDBCardTitle>
                                     <MDBCardText>

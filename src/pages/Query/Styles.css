@@ -1,9 +1,11 @@
 .producto {
-    width: 300px;
+    width: 400px;
+    height: 450px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    margin: 20px;
+    margin: 10px;
+    padding: 10px;
 }
 
 .producto:hover {
@@ -11,8 +13,12 @@
 }
 
 .left {
-    width: 100%;
-    height: 200px;
+    border: 1px solid #e9ecef;
+    padding: 2px;
+    float: left;
+    margin: 10px;
+    width: 50%;
+    height: 300px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-size: cover;
@@ -20,26 +26,20 @@
 }
 
 .right {
-    margin: 10px;
-    padding: 20px;
-    text-align: center;
-}
-
-.product {
-    margin-top: 10px;
-}
-
-.product h4 {
-    margin: 10px 0;
+    height: auto !important;
+    width: auto !important;
+    text-align: justify-all;
 }
 
 .product-grid {
-    padding: 10px;
-    margin: 15px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    grid-column: 1 / span 3;
+    margin-top: 20px;
 }
+
+
 .add-to-cart {
     background-color: #f8f9fa;
     border: none;
@@ -60,27 +60,34 @@
 }
 
 .flex-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .cards {
-    grid-column: 1; /* Coloca las cards en la primera columna */
+    grid-column: 1;
 }
 
 .Imperdible {
-    grid-column: 2 / span 2; /* Coloca el elemento Imperdible en las columnas 2 y 3 */
+    grid-column: 2 / span 2;
 }
 
 .lista {
-    grid-column: 2 / span 2; /* Coloca el elemento lista en las columnas 2 y 3 */
+    grid-column: 2 / span 2;
 }
-.product-grid {
-    grid-column: 1 / span 3; /* Coloca el elemento product-grid en las tres columnas */
-    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-}
+
+
+
 .carousel{
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.publicidad {
+    margin-left: 30px;
+    background-color: #f5f5f5;
+    height: 470px;
+    width: 550px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
     margin-bottom: 20px;
 }

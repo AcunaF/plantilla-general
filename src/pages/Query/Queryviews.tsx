@@ -8,15 +8,14 @@ export const ProductQuery = (product: { image: string | number | boolean | React
             </div>
             <div className="right">
                 <div className="product">
-                    <h4>{product.name}</h4>
-                    <h4>{product.description}</h4>
-                    <h4>Precio: {product.price}</h4>
-                    <h4>Categoria</h4>
+                    <p><b>{product.name}</b></p>
+                    <span>{product.description}</span>
+                    <h5>Precio: {product.price}</h5>
                     <button className="add-to-cart">
                         <FaShoppingCart /> Agregar al carrito
                     </button>
                 </div>
             </div>
         </div>
-    )
+    );
 }

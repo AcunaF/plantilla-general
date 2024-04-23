@@ -2,22 +2,74 @@ import {AuthContext} from "../../components/auth/context/AuthContext.tsx";
 import {useContext} from "react";
 import Accordion from "react-bootstrap/Accordion";
 import {ImageCarousel} from "./Carousel.tsx";
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.jsx";
+import {MDBBadge} from "mdb-react-ui-kit";
+import "./Home.css";
 
 export const Home = () => {
     // @ts-ignore
     const {dataUser, setDataUser} = useContext(AuthContext);
-
-    const handleReset = () => {
-        setDataUser((prevState: any) => ({
-            ...prevState,
-            firstName: ''
-        }));
-        console.log('Reset');
-    };
     return (
-        <div>
-            <h1>Home</h1>
-            <h2>Bienvenido {dataUser ? dataUser.firstName : ''}</h2>
+        <div className="containerHome">
+            <div className="CarouselFooter">
+                <CarouselFooter/>
+            </div>
+            <div>
+                <h2>
+                    Imperdibles de la semana
+                    <MDBBadge className='container'>NEW</MDBBadge>
+                </h2>
+            </div>
+            <div className="bannerDNI">
+                <div className="container">
+                    <div className="lista">
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Buzos
+
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Zapatillas
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Buzos
+
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                        </button>
+                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                title="Popover title"
+                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                        </button>
+                    </div>
+                    <br/>
+                </div>
+
+            </div>
+            <br/>
+            <div>
+                <ImageCarousel/>
+            </div>
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Resumen</Accordion.Header>
@@ -90,7 +142,7 @@ export const Home = () => {
                             </li>
 
 
-                                <h4> Hooks de react</h4>
+                            <h4> Hooks de react</h4>
 
                             <li>
                                 <p>SON FUNCIONES QUE NOS PERMITE USAR ESTADOS Y CICLOS DE VIDA EN COMPNENTES FUNCIOALES.
@@ -159,72 +211,67 @@ export const Home = () => {
 
                             </li>
 
-                                <li><p><b>USECONTEXT</b>
-                                    Nos permite compartir datos sin necesidad de pasar propiedades a los componentes,
-                                    normalmente si tenemos que pasar propiedades entre componentes, por ejemplo tenes
-                                    los componentes 1,2,3 y queremos pasar props del 1 al 3 tenemos que pasar por el
-                                    componente 2, con usecontext podemos envolver la aplicacion con un proveedor y asi
-                                    pasar como variable global a todos los hijos. podemos acceder a esta ellos usando
-                                    react.createContext. PAra acceder a estos datos tenemos que crear el contexto dentro
-                                    de nuestra apliacacion contenedora, normalmente app va el nombre.provider que va a
-                                    contener, en nuestro "contenedor" el valor de la misma.
-                                </p></li>
+                            <li><p><b>USECONTEXT</b>
+                                Nos permite compartir datos sin necesidad de pasar propiedades a los componentes,
+                                normalmente si tenemos que pasar propiedades entre componentes, por ejemplo tenes
+                                los componentes 1,2,3 y queremos pasar props del 1 al 3 tenemos que pasar por el
+                                componente 2, con usecontext podemos envolver la aplicacion con un proveedor y asi
+                                pasar como variable global a todos los hijos. podemos acceder a esta ellos usando
+                                react.createContext. PAra acceder a estos datos tenemos que crear el contexto dentro
+                                de nuestra apliacacion contenedora, normalmente app va el nombre.provider que va a
+                                contener, en nuestro "contenedor" el valor de la misma.
+                            </p></li>
 
-                                <li><p><b>USEREDUCER</b>
-                                    es parecido al usestate pero en lugar de actualizar el estado de la variable o el
-                                    valor que estes guardando solamente en el componente, cuando quiera actualizar el
-                                    estado del componente voy a llamar a una accion esa accion va a llamar a un reducer
-                                    y el reduce va a actualizar a un estado en el estorage definido previamente en la
-                                    aplicacion. nos permite una base de codigo mas entendible y escalable.</p>
-                                </li>
-                                <ul> 1_ declarar el estado inicial, normalmente se declara como un objeto con las
-                                    propiedades que queremos guardar en el estado, por ejemplo un objeto con un
-                                    array de mensajes y un string con el nombre del usuario
-                                </ul>
-                                <ul> 2_definir la funcion reduce que toma como parmetro un estado que seria el
-                                    actual o el inicial, tambien una accion que puede ser de diferentes tipos. para
-                                    usar el reduce en la funcion presisamos crear una constante y pasamos el
-                                    dispatch como parametro ( es una funcion tipo setter que no actualiza el estado
-                                    ahi si no que lo manda al store y de ahi al componente, a diferencia del
-                                    usestate que solo actualiza la variable)
-                                </ul>
-                                <ul> 3_en el componente llamamos al dispatch y pasamos un objeto con el tipo de
-                                    accion y los datos que queremos guardar en el estado
-                                </ul>
-                                <ul> 4_en el componente llamamos al estado y lo mostramos en el componente</ul>
+                            <li><p><b>USEREDUCER</b>
+                                es parecido al usestate pero en lugar de actualizar el estado de la variable o el
+                                valor que estes guardando solamente en el componente, cuando quiera actualizar el
+                                estado del componente voy a llamar a una accion esa accion va a llamar a un reducer
+                                y el reduce va a actualizar a un estado en el estorage definido previamente en la
+                                aplicacion. nos permite una base de codigo mas entendible y escalable.</p>
+                            </li>
+                            <ul> 1_ declarar el estado inicial, normalmente se declara como un objeto con las
+                                propiedades que queremos guardar en el estado, por ejemplo un objeto con un
+                                array de mensajes y un string con el nombre del usuario
                             </ul>
-                            <br></br>
-                            <li>Componentes de Clase y Componentes Funcionales: <a
-                                href="https://dev.to/cuarte4/componentes-de-clase-o-funcionales-4c1c" target="_blank"
-                                rel="noopener noreferrer">
-                                Link </a></li>
-                            <li>
-                              React Router:<a
-                                    href="https://www.escuelafrontend.com/react-router-6" target="_blank"
-                                   >
-                                    Link </a></li>
-                            <li>Flujo de datos y levantamiento del estado:</li>
-                            <li>React y APIs:</li>
-                            <li>Testing en React:</li>
-                            <li>Optimización del rendimiento en React:</li>
-                            <li>React y TypeScript:</li>
-                            <li>Manejo de errores en React:</li>
-                            <li>React y el desarrollo de aplicaciones de escritorio:</li>
+                            <ul> 2_definir la funcion reduce que toma como parmetro un estado que seria el
+                                actual o el inicial, tambien una accion que puede ser de diferentes tipos. para
+                                usar el reduce en la funcion presisamos crear una constante y pasamos el
+                                dispatch como parametro ( es una funcion tipo setter que no actualiza el estado
+                                ahi si no que lo manda al store y de ahi al componente, a diferencia del
+                                usestate que solo actualiza la variable)
+                            </ul>
+                            <ul> 3_en el componente llamamos al dispatch y pasamos un objeto con el tipo de
+                                accion y los datos que queremos guardar en el estado
+                            </ul>
+                            <ul> 4_en el componente llamamos al estado y lo mostramos en el componente</ul>
+                        </ul>
+                        <br></br>
+                        <li>Componentes de Clase y Componentes Funcionales: <a
+                            href="https://dev.to/cuarte4/componentes-de-clase-o-funcionales-4c1c" target="_blank"
+                            rel="noopener noreferrer">
+                            Link </a></li>
+                        <li>
+                            React Router:<a
+                            href="https://www.escuelafrontend.com/react-router-6" target="_blank"
+                        >
+                            Link </a></li>
+                        <li>Flujo de datos y levantamiento del estado:</li>
+                        <li>React y APIs:</li>
+                        <li>Testing en React:</li>
+                        <li>Optimización del rendimiento en React:</li>
+                        <li>React y TypeScript:</li>
+                        <li>Manejo de errores en React:</li>
+                        <li>React y el desarrollo de aplicaciones de escritorio:</li>
                         <br/>
                         <><h5>Documentacion <a
                             href="https://es.react.dev/learn" target="_blank"
                             rel="noopener noreferrer">
                             Link </a></h5></>
-
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
-            <div className="">
-                <button className="btn btn-outline-secondary m-2" onClick={handleReset}>
-                    Reset
-                </button>
-            </div>
-            <ImageCarousel/>
         </div>
+
+
     )
 }

@@ -1,11 +1,10 @@
-import { Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Home} from "../pages/Home/Home.tsx";
-import {Page1} from "../pages/Page1";
+import {Page1} from "../pages/Page1/Page1.tsx";
 import {Page2} from "../pages/Page2";
 import {Page3} from "../pages/Page3";
 import {AltaUser} from "../pages/AltaUser.tsx";
-import {Navbar} from "../components/ui/NavBar/navBar";
-import { LoginForm} from "../Auth/Login/Login.tsx"
+import {LoginForm} from "../Auth/Login/Login.tsx"
 import {AuthProvider} from "../components/auth/context/AuthProvider.tsx";
 import {FavoriteList} from "../components/FavoriteLIst/FavoriteList.tsx";
 import {TrakerList} from "../components/TrakerList/TrakerList.tsx";
@@ -16,13 +15,16 @@ import {ChatBot} from "../components/ChatBot/ChatBot.tsx";
 import {Search} from "../components/Search/Search.tsx";
 import {ReactQuery} from "../pages/Query/ReactQuery.tsx";
 import {Carrito} from "../components/Carrito/Carrito.tsx";
+import "../components/ui/NavBar/stylesNav.css";
+import "./Routes.css"
+import {Navbar} from "../components/ui/NavBar/navBar.tsx";
 
 export const PageRoutes = () => {
 
     return (
         <AuthProvider>
             <Navbar/>
-            <div className="container mt-2">
+            <div className="containerBody">
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     {/*Rutas que solo se acceden estando logueado*/}
@@ -33,7 +35,6 @@ export const PageRoutes = () => {
                     {/*Rutas login*/}
                     <Route path="AltaUser" element={<AltaUser/>}/>
                     <Route path={"login"} element={<LoginForm/>}/>
-                    <Route path={"*"} element={<h1>Not Found</h1>}/>
                     {/*Employe */}
                     <Route path={"favorites"} element={<FavoriteList/>}/>
                     <Route path={"flollowers"} element={<Followers/>}/>
@@ -43,6 +44,7 @@ export const PageRoutes = () => {
                     <Route path={"bot"} element={<ChatBot/>}/>
                     <Route path={'search'} element={<Search/>}/>
                     <Route path={"carrito"} element={<Carrito/>}/>
+                    <Route path={"*"} element={<h1>Not Found</h1>}/>
                 </Routes>
             </div>
         </AuthProvider>

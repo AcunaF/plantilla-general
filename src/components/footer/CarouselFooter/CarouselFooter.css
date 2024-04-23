@@ -1,0 +1,8 @@
+.carousel {
+    border: 2px solid #f8f9fa;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}

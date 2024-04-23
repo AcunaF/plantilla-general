@@ -1,0 +1,22 @@
+.card {
+    width: 400px;
+    height: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-expanded {
+    width: auto;
+    height: auto;
+}
+.text {
+    margin: 5px;
+    padding: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text-expanded {
+    display: block;
+}

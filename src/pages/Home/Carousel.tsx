@@ -1,34 +1,36 @@
 import './Home.css';
-import {MDBCarousel, MDBCarouselItem,} from 'mdb-react-ui-kit'
+import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../components/auth/context/AuthContext.tsx"; // requires a loader
-
+import { useEffect, useState } from "react";
 
 export const ImageCarousel = () => {
     const [galeria, setGaleria] = useState([]);
 
-    // @ts-ignore
-    const { dataUser, setDataUser } = useContext(AuthContext);
-
     useEffect(() => {
-        fetch (`http://localhost:5004/api/galeria`)
-            .then((response) => response.json())
-            .then((data) => setGaleria(data.items))
-            .catch (err => console.log(`Error`,err));
-
+        fetch(`http://localhost:5005/api/galeria`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("No se pudo obtener la galería de imágenes");
+                }
+                return response.json();
+            })
+            .then((data) => setGaleria(data.items.slice(0, 10)))
+            .catch(err => console.error('Error al obtener la galería:', err));
     }, []);
 
     return (
-        <MDBCarousel showControls showIndicators touch={false}>
-            {galeria.slice(0, 10).map((item, index) => {
-                const {imagen} = item;
-                return (
-                    <MDBCarouselItem itemId={index + 1} key={index}>
-                        <img src={imagen} className='d-block w-100 carousel-image' alt='...'/>
-                    </MDBCarouselItem>
-                );
+        <MDBCarousel showControls showIndicators touch={true}>
+            {galeria.map((item, index) => {
+                if (index < 10) {
+                    return (
+                        <MDBCarouselItem itemId={index + 1} key={index}>
+                            <img src={item.imagen} className='d-block w-100 carousel-image' alt={`Imagen ${index + 1}`} />
+                        </MDBCarouselItem>
+                    );
+                } else {
+                    return null;
+                }
             })}
         </MDBCarousel>
-    )
-}
+    );
+};

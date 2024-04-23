@@ -1,7 +1,11 @@
 import "./Footer.css"
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import {Page2} from "../../pages/Page2.tsx";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export const Footer = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
             <br/>
@@ -39,11 +43,10 @@ export const Footer = () => {
                         <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
                             <h6 className='text-uppercase fw-bold mb-4'>
                                 <MDBIcon icon="gem" className="me-3" />
-                                Company name
+                                <NavLink className="nav-item nav-link" to="/Page2">Employee profile</NavLink>
                             </h6>
                             <p>
-                                Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit.
+                                Here you will find all the information about the employees of the page, you must be Login to access
                             </p>
                         </MDBCol>
 
@@ -61,12 +64,12 @@ export const Footer = () => {
                             </p>
                             <p>
                                 <a href='#!' className='text-reset'>
-                                    Vue
+                                    Node
                                 </a>
                             </p>
                             <p>
                                 <a href='#!' className='text-reset'>
-                                    Laravel
+                                    Sql
                                 </a>
                             </p>
                         </MDBCol>
@@ -75,31 +78,20 @@ export const Footer = () => {
                             <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
                             <p>
                                 <a href='#!' className='text-reset'>
-                                    Pricing
+                                    Linkedin
                                 </a>
                             </p>
                             <p>
                                 <a href='#!' className='text-reset'>
-                                    Settings
-                                </a>
-                            </p>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Orders
-                                </a>
-                            </p>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Help
+                                    Github
                                 </a>
                             </p>
                         </MDBCol>
-
                         <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
                             <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
                             <p>
                                 <MDBIcon icon="home" className="me-2" />
-                                New York, NY 10012, US
+                                Tandil, Buenos Aires, Argentina
                             </p>
                             <p>
                                 <MDBIcon icon="envelope" className="me-3" />
@@ -107,9 +99,6 @@ export const Footer = () => {
                             </p>
                             <p>
                                 <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
-                            </p>
-                            <p>
-                                <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
                             </p>
                         </MDBCol>
                     </MDBRow>
@@ -119,7 +108,7 @@ export const Footer = () => {
             <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
                 © 2021 Copyright:
                 <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
-                    MDBootstrap.com
+                    Facundo Acuña
                 </a>
             </div>
         </MDBFooter>

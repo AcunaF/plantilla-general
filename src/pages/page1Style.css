@@ -1,10 +1,74 @@
-.box{
-    width: 250px;
-    height: 150px;
+.box1{
+    width: auto;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgray;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    box-shadow: #343a40 0px 0px 2px;
+    margin-bottom: 15px;
+    animation: jump 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 3; /* Realiza la animación de salto tres veces */
+
+}
+.box2{
+    width: auto;
+    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
-    border: 2px solid #000;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    box-shadow: #343a40 0px 0px 2px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out; /* Transición suave al cambiar el tamaño */
 
+}
+.box3{
+    width: auto;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    box-shadow: #343a40 0px 0px 2px;
+    margin-bottom: 15px;
+
+}
+
+@keyframes jump {
+    0%, 20%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.card{
+    margin: 5% 0%;
+}
+
+.card-body{
+    margin: 0% 0% 0% 3%;
+    padding: 6% 0%;
 }
