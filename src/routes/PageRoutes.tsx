@@ -18,13 +18,14 @@ import {Carrito} from "../components/Carrito/Carrito.tsx";
 import "../components/ui/NavBar/stylesNav.css";
 import "./Routes.css"
 import {Navbar} from "../components/ui/NavBar/navBar.tsx";
+import {Register} from "../pages/Register.jsx";
 
 export const PageRoutes = () => {
 
     return (
         <AuthProvider>
             <Navbar/>
-            <div className="containerBody">
+            <div className="container-fluid ">
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     {/*Rutas que solo se acceden estando logueado*/}
@@ -44,6 +45,7 @@ export const PageRoutes = () => {
                     <Route path={"bot"} element={<ChatBot/>}/>
                     <Route path={'search'} element={<Search/>}/>
                     <Route path={"carrito"} element={<Carrito/>}/>
+                    <Route path={"register"} element={<Register/>}/>
                     <Route path={"*"} element={<h1>Not Found</h1>}/>
                 </Routes>
             </div>

@@ -1,4 +1,3 @@
-
 .carousel-image {
     border :2px solid #f8f9fa;
     border-radius: 10px;
@@ -6,15 +5,80 @@
     max-height: 400px; /* Ajusta este valor según tus necesidades */
     max-width: 2000px;
     object-fit: cover; /* Esto asegura que las imágenes se redimensionen correctamente */
+
+
 }
 
+.banner{
+    border: 1px solid #f8f9fa;
+    border-radius: 10px;
+    box-shadow: black 1px 30px 80px;
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
+
+.bannerMc{
+    border: 1px solid red;
+    border-radius: 10px;
+    box-shadow: darkred 1px 20px 60px;
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
 
 .containerHome{
-    width: 80%;
+    width: 100%;
 }
 .CarouselFooter{
-    margin-top: 10px;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 20px;
 }
+
+.product-grid-home {
+        flex-wrap: wrap;
+        justify-content: center;
+        grid-column: 4 / span 3;
+        margin-top: 20px;
+}
+.contenedor-supermercado {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tarjeta {
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: auto;
+}
+
+.tarjeta h3 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.tarjeta p {
+    font-size: 14px;
+    color: #666;
+}
+
+.tituloPago{
+
+}
+
+
+
+
+
+
+
+
+
+

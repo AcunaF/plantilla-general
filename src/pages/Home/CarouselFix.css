@@ -1,0 +1,22 @@
+.andes-carousel-snapped__wrapper {
+    display: flex;
+    will-change: transform;
+    flex-direction: row;
+}
+
+.andes-carousel-snapped__slide {
+    /* Estilos de cada diapositiva del carrusel */
+}
+
+.carousel__item {
+    /* Estilos de cada elemento del carrusel */
+}
+
+.carousel__item-img img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel__item-title {
+    /* Estilos del título del producto */
+}

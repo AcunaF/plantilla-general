@@ -1,277 +1,237 @@
 import {AuthContext} from "../../components/auth/context/AuthContext.tsx";
 import {useContext} from "react";
-import Accordion from "react-bootstrap/Accordion";
 import {ImageCarousel} from "./Carousel.tsx";
-import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.jsx";
-import {MDBBadge} from "mdb-react-ui-kit";
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter";
 import "./Home.css";
+import {useQuery} from "react-query";
+import {TarjetaProducto} from "./AndesCard.tsx";
+import prn from "../../assets/Banners/PRNews.io4_.jpg";
+import imagesblack from "../../assets/Banners/imagesblack.jpeg";
+import pagos from "../../assets/Banners/itc_medios_pago_banner_original_2017_08_31_01.jpg";
+import mcdonas from "../../assets/Banners/mcdonalds.png";
+import Card from "react-bootstrap/Card";
+import {Col, Popover, Row} from "react-bootstrap";
+import {PopoverTittle, PopovweTittle} from "../../components/Popover/PopoverTittle.jsx";
+
+// ... rest of the code
+
 
 export const Home = () => {
+
     // @ts-ignore
     const {dataUser, setDataUser} = useContext(AuthContext);
+    const getProducts = () => fetch('https://peticiones.online/api/products')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    const {data, error} = useQuery('products', getProducts)
+    if (error) {
+        // @ts-ignore
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!data) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div className="containerHome">
-            <div className="CarouselFooter">
-                <CarouselFooter/>
-            </div>
-            <div>
-                <h2>
-                    Imperdibles de la semana
-                    <MDBBadge className='container'>NEW</MDBBadge>
-                </h2>
-            </div>
-            <div className="bannerDNI">
-                <div className="container">
-                    <div className="lista">
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amzing content. It's very engaging. Right?">Camperas
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Buzos
+        <>
+            <div className="d-flex">
+                <div className="d-flex flex-column col-2 bg-black">
 
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Zapatillas
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amzing content. It's very engaging. Right?">Camperas
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Buzos
 
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
-                        </button>
-                        <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
-                                title="Popover title"
-                                data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
-                        </button>
-                    </div>
+
+                </div>
+            </div>
+
+            <PopoverTittle/>
+
+            <div className="container">
+                <div className="banner mt-3">
+                    <img
+                        style={{width: "100%", height: "40%", objectFit: "cover"}}
+                        src={imagesblack} alt='...'/>
+                </div>
+                <div className="">
+                    <Row>
+                        <Card.Body>
+                            <Card.Text>
+                                .
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Img variant="bottom" src={pagos}/>
+                    </Row>
                     <br/>
                 </div>
+                <div className="bannerDNI">
+                    <div className="container">
+                        <div className="lista">
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Buzos
 
-            </div>
-            <br/>
-            <div>
-                <ImageCarousel/>
-            </div>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Resumen</Accordion.Header>
-                    <Accordion.Body>
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Zapatillas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Buzos
+
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                        </div>
                         <br/>
-                        <ul>
-                            <li>
-                                <p> COMPONENTES
-                                    Los componentes permiten separar la interfaz de usuario en piezas independientes,
-                                    reutilizables y pensar en cada pieza de forma aislada. Son como las funciones de
-                                    JavaScript. Aceptan entradas arbitrarias
-                                    (llamadas “props”) y retornan elementos de React que describen lo que debe aparecer
-                                    en la pantalla.
-                                    La forma más sencilla de definir un componente es escribir una función de
-                                    JavaScript:
-                                    Los componentes pueden referirse a otros componentes en su retorno. Esto nos permite
-                                    utilizar la misma abstracción de componente para cualquier nivel de detalle. Un
-                                    botón, un cuadro de diálogo, un formulario, una pantalla: en las aplicaciones de
-                                    React, todos ellos son expresados comúnmente como componentes.
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    QUE SON LAS PROPS?
-                                    Las props son la colección de datos que un componente recibe del contenedor padre, y
-                                    que
-                                    pueden usarse para definir los elementos de React que retornará el componente. En
-                                    términos prácticos, si un componente necesita recibir información para funcionar, la
-                                    recibe vía props.
+                    </div>
+                </div>
+                <div className="">
+                    <TarjetaProducto imageUrl="https://peticiones.online/api/products" title="Producto 1" price={100}
+                                     originalPrice={150}/>
+                </div>
+                <br/>
+                <hr/>
+                <div className="banner">
+                    <img
+                        style={{width: "100%", height: "40%", objectFit: "cover"}}
+                        src={prn} alt='...'/>
+                </div>
+                <br/>
 
-                                    <p> COMO SE PASAN PROPS ENTRE COMPONENTES
-                                        Para pasar props, simplemente agrégalas al JSX, de la misma forma en que lo
-                                        harías
-                                        con los atributos HTML. Para acceder a las props, utiliza la sintaxis de
-                                        desestructuración
-                                        function
-                                    </p>
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b> COMO RENDERIZA REACT</b>
-                                    permite a los desarrolladores controlar dinámicamente qué contenido se muestra
-                                    en la
-                                    pantalla en función de valores específicos que pueden almacenarse en una
-                                    variable,
-                                    estado o props.
-                                    Esto puede ser extremadamente útil en situaciones en las que quieras mostrar u
-                                    ocultar
-                                    determinados elementos de la interfaz de usuario, cambiar el diseño de una
-                                    página o
-                                    mostrar contenido diferente en función de las interacciones del usuario.
-                                    El renderizado condicional es importante en las aplicaciones React porque te
-                                    permite
-                                    crear interfaces de usuario dinámicas e interactivas que pueden responder a
-                                    datos
-                                    cambiantes e interacciones del usuario en tiempo real.
-                                    Te ayudará a mejorar el rendimiento y la eficiencia de tus aplicaciones evitando
-                                    la
-                                    renderización innecesaria de componentes o elementos que no son necesarios (/n)
-                                    <br></br>
-                                    <b> ¿Qué es el evento onChange en React?</b>
-                                    El evento onChange en React es una de las funciones predeterminadas en React que
-                                    nos
-                                    permiten definir una acción a ejecutar cuando una situación ocurre. Este evento
-                                    se
-                                    utiliza comúnmente para tratar los datos introducidos por el usuario en un
-                                    formulario
-                                </p>
-                            </li>
+                <br/>
+                <div className="">
+                    <img
+                        style={{width: "100%", height: "40%", objectFit: "cover"}}
+                        src={pagos} alt='...'/>
+                </div>
+                <div className="CarouselFooter">
+                    <CarouselFooter/>
+                </div>
 
+                <div>
+                </div>
+                <div className="contenedor-supermercado">
+                    {data.results.map((prod: any) => (
+                        <div
+                            className="tarjeta"
+                            key={prod.key}>
+                            <img src={prod.image} alt={prod.name}/>
+                            <h2>{prod.name}</h2>
+                            <p>{prod.description}</p>
+                            <p>{prod.price}</p>
+                            <p>{prod.category}</p>
+                        </div>
+                    ))}
+                </div>
+                <br/>
+                <div className="bannerDNI">
+                    <div className="container">
+                        <div className="lista">
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Buzos
 
-                            <h4> Hooks de react</h4>
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Zapatillas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amzing content. It's very engaging. Right?">Camperas
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Buzos
 
-                            <li>
-                                <p>SON FUNCIONES QUE NOS PERMITE USAR ESTADOS Y CICLOS DE VIDA EN COMPNENTES FUNCIOALES.
-                                    NOS PERMITEN MANIPULAR Y USAR ESTADO EN LOS COMPONENTES QUE CREAMOS COMO FUNCIONES
-                                    SIN NESECIDAD DE USAR CLASES.
-
-                                    Funciones especiales de JS que empiezan por use
-                                    y permiten acceder a las caracteriasticas de React en componentes funcionales</p>
-                            </li>
-                            <li>
-                                ¿Por que se introdujo : ayudan a simplificar el codigo de componentes tipo CLASE,
-                                permite reusar logica de estado mas facil, los componentes son menos complejos y tienen
-                                ciclos de vida. mas manejables y faciles sobre todo no se usa el this para acceder a las
-                                propiedades de la clase
-                                DIferentes Hooks: useSTate, useEffect, useContext, useRef, useMemo, useReducer,
-                                useCallback
-                            </li>
-                            <br/>
-                            <li>
-                                <p><b>USESTATE</b> Hook que nos permite crear variables de estado en un componente
-                                    funcional, es un hook ASINCRONO. Dentro de nuestra funcion recibe como parametro el
-                                    valor de la variable que querramos inicializar va a retornar un arreglo con dos
-                                    variables, normalmente es el nombre de la variable y el segundo es la misma variable
-                                    con un set adelante, ejemplo facu y setfacu.
-                                    recibe dos valores por que uno de ellos lo utilizamos para actualizar nuestro
-                                    componente y el otro es una funcion setter qeu la podemos llamar cuando querramos
-                                    actualizar nuestro estado.
-                                </p>
-                                <li>
-                                    <p><b>USEEFFECT</b> Hook que nos permite acceder a ciclos de vida del componente,
-                                        permite realizar efectos secundarios en un componente funcional. Los efectos
-                                        secundarios son operaciones que ocurren fuera del flujo normal de la
-                                        representación
-                                        del componente, como obtener datos de una API, configurar suscripciones o
-                                        modificar
-                                        el DOM.toma dos argumentos: una función que realiza el efecto secundario y una
-                                        matriz opcional de dependencias que especifican cuándo se debe ejecutar el
-                                        efecto.
-                                        La función pasada a useEffect se ejecuta después de que el componente se ha
-                                        renderizado por primera vez y luego se vuelve a ejecutar cada vez que cambia
-                                        alguna
-                                        de las dependencias.
-                                        Estas son las funciones que se usaban antes cuando los componentes se hacien en
-                                        clases, hacen cambios alo largo del ciclo de vida de la app.
-                                        <br></br>
-                                        <br></br>
-                                        <li>
-                                            <b> componentDIMOUNT</b> corre cuando el componente se monta por primera vez
-                                        </li>
-                                        <li>
-                                            <b> componentUPDATE</b> se actualiza algun valor
-                                        </li>
-                                        <li>
-                                            <b>componentWILLUNMOUNT</b> cuando el componente se desmonta
-                                        </li>
-                                        <br></br>
-                                        Todo esto se ahorra ahora usando el useEffect. Es una funcion que toma una
-                                        funcion como parametro y podemos hacer cualquier cosa que tenga que ver con el
-                                        ciclo de vida de nuestra app.
-                                        Toma dependencias como segundo parametro, que son valores que cambian, entonces
-                                        este efecto se activa cuando estos valores cambien
-                                    </p>
-                                </li>
-                                <li><p><b>usesMemo</b> Memoriza valores de una operacion compleja</p></li>
-                                <li><p><b>usesCallback</b>Permite memorizar funciones </p></li>
-
-                            </li>
-
-                            <li><p><b>USECONTEXT</b>
-                                Nos permite compartir datos sin necesidad de pasar propiedades a los componentes,
-                                normalmente si tenemos que pasar propiedades entre componentes, por ejemplo tenes
-                                los componentes 1,2,3 y queremos pasar props del 1 al 3 tenemos que pasar por el
-                                componente 2, con usecontext podemos envolver la aplicacion con un proveedor y asi
-                                pasar como variable global a todos los hijos. podemos acceder a esta ellos usando
-                                react.createContext. PAra acceder a estos datos tenemos que crear el contexto dentro
-                                de nuestra apliacacion contenedora, normalmente app va el nombre.provider que va a
-                                contener, en nuestro "contenedor" el valor de la misma.
-                            </p></li>
-
-                            <li><p><b>USEREDUCER</b>
-                                es parecido al usestate pero en lugar de actualizar el estado de la variable o el
-                                valor que estes guardando solamente en el componente, cuando quiera actualizar el
-                                estado del componente voy a llamar a una accion esa accion va a llamar a un reducer
-                                y el reduce va a actualizar a un estado en el estorage definido previamente en la
-                                aplicacion. nos permite una base de codigo mas entendible y escalable.</p>
-                            </li>
-                            <ul> 1_ declarar el estado inicial, normalmente se declara como un objeto con las
-                                propiedades que queremos guardar en el estado, por ejemplo un objeto con un
-                                array de mensajes y un string con el nombre del usuario
-                            </ul>
-                            <ul> 2_definir la funcion reduce que toma como parmetro un estado que seria el
-                                actual o el inicial, tambien una accion que puede ser de diferentes tipos. para
-                                usar el reduce en la funcion presisamos crear una constante y pasamos el
-                                dispatch como parametro ( es una funcion tipo setter que no actualiza el estado
-                                ahi si no que lo manda al store y de ahi al componente, a diferencia del
-                                usestate que solo actualiza la variable)
-                            </ul>
-                            <ul> 3_en el componente llamamos al dispatch y pasamos un objeto con el tipo de
-                                accion y los datos que queremos guardar en el estado
-                            </ul>
-                            <ul> 4_en el componente llamamos al estado y lo mostramos en el componente</ul>
-                        </ul>
-                        <br></br>
-                        <li>Componentes de Clase y Componentes Funcionales: <a
-                            href="https://dev.to/cuarte4/componentes-de-clase-o-funcionales-4c1c" target="_blank"
-                            rel="noopener noreferrer">
-                            Link </a></li>
-                        <li>
-                            React Router:<a
-                            href="https://www.escuelafrontend.com/react-router-6" target="_blank"
-                        >
-                            Link </a></li>
-                        <li>Flujo de datos y levantamiento del estado:</li>
-                        <li>React y APIs:</li>
-                        <li>Testing en React:</li>
-                        <li>Optimización del rendimiento en React:</li>
-                        <li>React y TypeScript:</li>
-                        <li>Manejo de errores en React:</li>
-                        <li>React y el desarrollo de aplicaciones de escritorio:</li>
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                            <button type="button" className="btn btn-lg btn-danger m-2" data-toggle="popover"
+                                    title="Popover title"
+                                    data-content="And here's some amazing content. It's very engaging. Right?">Pantalones
+                            </button>
+                        </div>
                         <br/>
-                        <><h5>Documentacion <a
-                            href="https://es.react.dev/learn" target="_blank"
-                            rel="noopener noreferrer">
-                            Link </a></h5></>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-        </div>
+                    </div>
 
+                </div>
+                <br/>
+                <div>
+                    <ImageCarousel/>
+                </div>
+                <div>
+                    <Row xs={1} md={2} className="g-6">
+                        {Array.from({length: 6}).map((_, idx) => (
+                            <Col key={idx}>
+                                <Card>
+                                    <Card.Img variant="top" src={prn}/>
+                                    <Card.Body>
+                                        <Card.Title>Card title</Card.Title>
+                                        <Card.Text>
+                                            This is a longer card with supporting text below as a natural
+                                            lead-in to additional content. This content is a little bit
+                                            longer.
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
+                <Row>
+                    <Card.Img variant="top" src={mcdonas}/>
+                    <Card.Body>
+                        <Card.Text>
+                            .
+                        </Card.Text>
+                    </Card.Body>
+                </Row>
+            </div>
+        </>
 
     )
 }

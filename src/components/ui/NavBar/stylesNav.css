@@ -6,6 +6,9 @@
     cursor: pointer;
 }
 .navbar-container {
-    width: auto;!important;
-    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: white;
 }

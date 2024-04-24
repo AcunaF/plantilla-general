@@ -5,6 +5,7 @@ import App from './App.tsx'
 import './index.css'
 import {Footer} from "./components/footer/Footer.tsx";
 import {Navbar} from "./components/ui/NavBar/navBar.tsx";
+import ChatBot from "./components/ChatBot/ChatBot.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <div className="td-container-wrapr">
                 <App/>
             </div>
+            <ChatBot/>
             <div>
                 <Footer/>
             </div>

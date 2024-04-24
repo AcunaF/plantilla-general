@@ -1,46 +1,30 @@
-import Accordion from "react-bootstrap/Accordion";
-import   { Equipos }  from "../components/hooks/usestate.jsx";
-import {CardsNew} from "../components/New-cards/CardsNew.tsx";
+import {Col, Row} from 'react-bootstrap';
+import { SearchForm } from '../components/ActivityForm/forms/search-form.jsx';
+import Container from 'react-bootstrap/Container';
+import Image from 'react-bootstrap/Image';
+import company from '../assets/company/imagesCompany.jpeg';
+import company2 from '../assets/company/images-logo.jpeg';
+import company3 from '../assets/company/images-seguro.png';
 export const Page3 = () => {
     return (
         <div>
-            <CardsNew/>
-            <h1>HOOKS</h1>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Hooks nativos de React
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        <h6>Hooks</h6>
-                        <ul>
-                            <li>
-                                <p>UseStatet: </p>
-                                <i className="ion-android-call"></i>
 
-                            </li>
-                            <span>El hook useState crea un estado local para un componente y devuelve un array con dos posiciones: la primera es el valor actual del estado y la segunda es una función para actualizar ese valor.: </span>
-                           <Equipos/>
-                            <br/>
-                            <li>
-                                <p>    UseEffect:     </p>
-                            </li>
-                            El hook useEffect ejecuta una función cada vez que cambia una dependencia y devuelve una función opcional para limpiar los efectos secundarios.                        </ul>
-                        <br/>
-                        <hr/>
-                        <ul>
-                            <li>
-                                <p>    Probar y mejorar el chatbot:
-                                </p>
-                            </li>
-                            <li>
-                                <p>Desplegar el chatbot:</p>
-                            </li>
+            <h1>Registra tus productos</h1>
+            <SearchForm/>
+            <Container>
+                <Row>
+                    <Col xs={6} md={4}>
+                        <Image src={company} roundedCircle />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src={company2} roundedCircle />
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <Image src={company3} roundedCircle />
+                    </Col>
+                </Row>
 
-                        </ul>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-
+            </Container>
         </div>
     )
 }

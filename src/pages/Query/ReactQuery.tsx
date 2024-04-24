@@ -10,8 +10,9 @@ import {
     MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import {Cards} from "../../components/Card/Cards.tsx";
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter";
 
-const ListGroupComponent = () => (
+export const ListGroupComponent = () => (
     <MDBListGroup light numbered style={{minWidth: '22rem'}}>
         <MDBListGroupItem className='d-flex justify-content-between align-items-start'>
             <div className='ms-2 me-auto'>
@@ -40,14 +41,15 @@ export const ReactQuery = () => {
             return (
                 <div className="flex-container">
 
-                    <div className="row-cols-4">
+                    <div className="product-grid">
                         <Cards/>
                     </div>
                             <h2>
-                                Imperdibles de la semana
+                                Tenemos todos los metodos de pago
                                 <MDBBadge className=''>NEW</MDBBadge>
-                            </h2>
+                                <CarouselFooter/>
 
+                            </h2>
                         <div className="">
                             <MDBAccordion initialActive={1}>
                                 <MDBAccordionItem collapseId={1} headerTitle='Accordion Item #1'>

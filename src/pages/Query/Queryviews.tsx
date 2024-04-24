@@ -1,6 +1,7 @@
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react"
 import { FaShoppingCart } from 'react-icons/fa';
 import "./Styles.css"
+
 export const ProductQuery = (product: { image: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; price: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined }) => {
     return (
         <div className="producto">

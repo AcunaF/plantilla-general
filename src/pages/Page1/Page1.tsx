@@ -2,6 +2,7 @@ import {useState} from "react";
 import '../page1Style.css';
 import {CardsNew} from "../../components/New-cards/CardsNew.tsx";
 import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter";
+import { Card, CardGroup } from "react-bootstrap";
 
 export const Page1 = () => {
 
@@ -30,14 +31,12 @@ export const Page1 = () => {
 
     return (
         <div className="container">
-            <div className="row-cols-auto">
+            <div className="row-cols-auto mb-5 ">
                 <CarouselFooter/>
             </div>
-
-            <div>
+            <div className="mb-5">
                 <CardsNew/>
             </div>
-            <div>
                 <div>
                     <p className="box1">Counter1 :{counter1}</p>
                     <button className="btn btn-primary m-2"
@@ -60,7 +59,6 @@ export const Page1 = () => {
                     </button>
                 </div>
                 <hr></hr>
-
                 <div>
                     <p className="box3">Counter3 :{counter3}</p>
                     <div className="btn-group m-2">
@@ -76,7 +74,7 @@ export const Page1 = () => {
                 </div>
                 <hr></hr>
 
-            </div>
+
             <div className="btn-box">
                 <button className="btn btn-primary m-2" onClick={handleReset}>
                     Reset
@@ -85,6 +83,50 @@ export const Page1 = () => {
                 </button>
             </div>
             <hr></hr>
+            <div>
+                <CardGroup>
+                    <Card>
+                        <Card.Img variant="top" src="holder.js/100px160" />
+                        <Card.Body>
+                            <Card.Title>Card title</Card.Title>
+                            <Card.Text>
+                                This is a wider card with supporting text below as a natural lead-in
+                                to additional content. This content is a little bit longer.
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last updated 3 mins ago</small>
+                        </Card.Footer>
+                    </Card>
+                    <Card>
+                        <Card.Img variant="top" src="holder.js/100px160" />
+                        <Card.Body>
+                            <Card.Title>Card title</Card.Title>
+                            <Card.Text>
+                                This card has supporting text below as a natural lead-in to
+                                additional content.{' '}
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last updated 3 mins ago</small>
+                        </Card.Footer>
+                    </Card>
+                    <Card>
+                        <Card.Img variant="top" src="holder.js/100px160" />
+                        <Card.Body>
+                            <Card.Title>Card title</Card.Title>
+                            <Card.Text>
+                                This is a wider card with supporting text below as a natural lead-in
+                                to additional content. This card has even longer content than the
+                                first to show that equal height action.
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last updated 3 mins ago</small>
+                        </Card.Footer>
+                    </Card>
+                </CardGroup>
+            </div>
         </div>
     )
 }
