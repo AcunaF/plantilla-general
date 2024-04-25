@@ -1,7 +1,8 @@
 import {AuthContext} from "../../components/auth/context/AuthContext.tsx";
 import {useContext} from "react";
 import {ImageCarousel} from "./Carousel.tsx";
-import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter";
+// @ts-ignore
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.jsx";
 import "./Home.css";
 import {useQuery} from "react-query";
 import {TarjetaProducto} from "./AndesCard.tsx";
@@ -10,14 +11,9 @@ import imagesblack from "../../assets/Banners/imagesblack.jpeg";
 import pagos from "../../assets/Banners/itc_medios_pago_banner_original_2017_08_31_01.jpg";
 import mcdonas from "../../assets/Banners/mcdonalds.png";
 import Card from "react-bootstrap/Card";
-import {Col, Popover, Row} from "react-bootstrap";
-import {PopoverTittle, PopovweTittle} from "../../components/Popover/PopoverTittle.jsx";
-
-// ... rest of the code
-
+import {Col, Row} from "react-bootstrap";
 
 export const Home = () => {
-
     // @ts-ignore
     const {dataUser, setDataUser} = useContext(AuthContext);
     const getProducts = () => fetch('https://peticiones.online/api/products')
@@ -42,16 +38,6 @@ export const Home = () => {
 
     return (
         <>
-            <div className="d-flex">
-                <div className="d-flex flex-column col-2 bg-black">
-
-
-
-                </div>
-            </div>
-
-            <PopoverTittle/>
-
             <div className="container">
                 <div className="banner mt-3">
                     <img
@@ -62,7 +48,7 @@ export const Home = () => {
                     <Row>
                         <Card.Body>
                             <Card.Text>
-                                .
+                                <br/>
                             </Card.Text>
                         </Card.Body>
                         <Card.Img variant="bottom" src={pagos}/>
@@ -115,8 +101,8 @@ export const Home = () => {
                     </div>
                 </div>
                 <div className="">
-                    <TarjetaProducto imageUrl="https://peticiones.online/api/products" title="Producto 1" price={100}
-                                     originalPrice={150}/>
+                    <TarjetaProducto imageUrl="https://peticiones.online/api/products" title=" " price={0}
+                                     originalPrice={0} name={" "}/>
                 </div>
                 <br/>
                 <hr/>

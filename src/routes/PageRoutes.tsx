@@ -19,6 +19,7 @@ import "../components/ui/NavBar/stylesNav.css";
 import "./Routes.css"
 import {Navbar} from "../components/ui/NavBar/navBar.tsx";
 import {Register} from "../pages/Register.jsx";
+import {Oferta} from "../Pages/Oferta.jsx";
 
 export const PageRoutes = () => {
 
@@ -46,7 +47,7 @@ export const PageRoutes = () => {
                     <Route path={'search'} element={<Search/>}/>
                     <Route path={"carrito"} element={<Carrito/>}/>
                     <Route path={"register"} element={<Register/>}/>
-                    <Route path={"*"} element={<h1>Not Found</h1>}/>
+                    <Route path={"oferta"} element={<Oferta />} />                    <Route path={"*"} element={<h1>Not Found</h1>}/>
                 </Routes>
             </div>
         </AuthProvider>

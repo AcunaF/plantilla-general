@@ -1,21 +1,21 @@
-import {useContext, useState} from 'react';
-import {FaArrowLeft, FaMoneyBillWave, FaShoppingCart, FaTrash, FaTrashAlt} from 'react-icons/fa';
-import {AuthContext} from '../auth/context/AuthContext.tsx';
-import './Carrito.css';
+import {useState} from 'react';
+import {FaArrowLeft, FaMoneyBillWave, FaShoppingCart, FaTrashAlt} from 'react-icons/fa';
 import {useNavigate} from 'react-router-dom';
+
+import './Carrito.css';
 
 export const Carrito = () => {
     const navigate = useNavigate();
-    const {dataUser} = useContext(AuthContext); // Ensure that 'dataUser' is defined in your AuthContextType
+
     const [items, setItems] = useState([]);
 
     const handleVolver = () => {
         navigate("/");
     }
     const handleCompra = () => {
-        navigate("/ReactQuery");
-
+        navigate("/");
     }
+
     const clearCart = () => {
         alert('Su carrito esta vacio');
         setItems([]);
@@ -23,8 +23,8 @@ export const Carrito = () => {
     function handlePagar() {
         alert('Gracias por su compra');
         setItems([]);
-
     }
+
     function removeItem(index: number) {
         const updatedItems = [...items];
         updatedItems.splice(index, 1);
@@ -39,7 +39,6 @@ export const Carrito = () => {
             <h2 className="carrito-title">Carrito de Compras</h2>
             <div className="carrito-header">
                 <FaShoppingCart className="cart-icon" />
-                <span className="carrito-usuario">Usuario: {dataUser.email}</span>
             </div>
             <table className="carrito-items">
                 <thead>
@@ -74,6 +73,3 @@ export const Carrito = () => {
         </div>
     );
 };
-
-
-
