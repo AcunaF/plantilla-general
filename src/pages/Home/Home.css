@@ -1,30 +1,10 @@
 .carousel-image {
-    border :2px solid #f8f9fa;
+    border: 0.5px solid lightgrey;
     border-radius: 10px;
-    box-shadow: black 2px 50px 50px;
+    box-shadow: lightgrey 1px 50px 40px;
     max-height: 400px; /* Ajusta este valor según tus necesidades */
     max-width: 2000px;
     object-fit: cover; /* Esto asegura que las imágenes se redimensionen correctamente */
-
-
-}
-
-.banner{
-    border: 1px solid #f8f9fa;
-    border-radius: 10px;
-    box-shadow: black 1px 30px 80px;
-    max-width: 2000px;
-    object-fit: cover;
-    margin-bottom: 25px;
-}
-
-.bannerMc{
-    border: 1px solid red;
-    border-radius: 10px;
-    box-shadow: darkred 1px 20px 60px;
-    max-width: 2000px;
-    object-fit: cover;
-    margin-bottom: 25px;
 }
 
 .containerHome{
@@ -42,6 +22,8 @@
         margin-top: 20px;
 }
 .contenedor-supermercado {
+    border-radius: 10px;
+    width: auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -69,11 +51,51 @@
     color: #666;
 }
 
-.tituloPago{
-
+.btn-btn-success{
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
+.banner{
+    box-shadow: lightgrey 1px 50px 40px;
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
+.bannerBlack{
+    box-shadow: black 1px 30px 40px;
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
 
+.banner{
+    border: 1px solid red;
+    border-radius: 10px;
+    box-shadow: red 1px 20px 60px;
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
+
+.banner{
+    animation: fadeIn 2s ease-in-out 1;
+Mc img{
+    width: 100%;
+    height: auto;
+}
+
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.cardsHomer{
+    max-width: 2000px;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
 
 
 

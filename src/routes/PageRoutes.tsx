@@ -18,15 +18,22 @@ import {Carrito} from "../components/Carrito/Carrito.tsx";
 import "../components/ui/NavBar/stylesNav.css";
 import "./Routes.css"
 import {Navbar} from "../components/ui/NavBar/navBar.tsx";
+// @ts-ignore
 import {Register} from "../pages/Register.jsx";
+// @ts-ignore
 import {Oferta} from "../Pages/Oferta.jsx";
+import {MediosDePago} from "../components/MediosDePago/MediosDePago.tsx"
+import {CategoryFiles} from "../components/Categorias/CategoryFiles.tsx";
+import {PopoverTittle} from "../components/Popover/popoverTittle.tsx";
 
 export const PageRoutes = () => {
 
     return (
         <AuthProvider>
-            <Navbar/>
-            <div className="container-fluid ">
+            <div>
+                <Navbar/>
+            </div>
+            <div className="container">
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     {/*Rutas que solo se acceden estando logueado*/}
@@ -47,7 +54,12 @@ export const PageRoutes = () => {
                     <Route path={'search'} element={<Search/>}/>
                     <Route path={"carrito"} element={<Carrito/>}/>
                     <Route path={"register"} element={<Register/>}/>
-                    <Route path={"oferta"} element={<Oferta />} />                    <Route path={"*"} element={<h1>Not Found</h1>}/>
+                    <Route path={"oferta"} element={<Oferta/>}/>
+                    <Route path={"pago"} element={<MediosDePago/>}/>
+                    <Route path={"*"} element={<h1>Not Found</h1>}/>
+                    {/**/}
+                    <Route path={"categorias"} element={<CategoryFiles/>}/>
+                    <Route path={"popover"} element={<PopoverTittle />} />
                 </Routes>
             </div>
         </AuthProvider>

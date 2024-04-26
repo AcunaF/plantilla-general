@@ -1,5 +1,5 @@
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import {PopoverTittle} from "../components/Popover/popoverTittle.jsx";
+import {PopoverTittle} from "../components/Popover/popoverTittle.tsx";
 import {FaShoppingCart} from "react-icons/fa";
 
 export const Oferta = () => {

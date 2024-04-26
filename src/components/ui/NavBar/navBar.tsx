@@ -5,6 +5,7 @@ import {AuthContext} from '../../auth/context/AuthContext';
 import {FaShoppingCart} from 'react-icons/fa';
 import './stylesNav.css';
 import imagenLogo from '../../../assets/company/logo.jpg';
+import {SubNavbar} from "../SubNavbar/SubNavbar.tsx";
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,17 +29,17 @@ export const Navbar = () => {
         dataUser.email = '';
         setIsLoggedIn(false);
         alert('Has cerrado sesión con éxito');
-        navigate('/Home'); // Redirigir a la página de cierre de sesión
+        navigate('/Home');
     };
     return (
-
+        <>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-                <div className="row d-flex align-items-center justify-content-end">
+                <div className="row d-flex m-lg-1 ">
                     <img
                         alt="Logo"
                         src={imagenLogo}
-                        width="50"
-                        height="50"
+                        width="80"
+                        height="70"
                         className="rounded-circle"
                     />
                     </div>
@@ -54,33 +55,21 @@ export const Navbar = () => {
                     <span className="navbar-toggler-icon"/>
                 </button>
                 <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
-                    <div className="navbar-nav">
+
                         <small>
                             <NavLink className="nav-item nav-link" to="/Page1">Productos</NavLink>
                         </small>
                         <small>
                             <NavLink className="nav-item nav-link" to="/Page3">Vender</NavLink>
                         </small>
-                        <small>
-                            <NavLink className="nav-item nav-link" to="/ReactQuery">Ofertas</NavLink>
-                        </small>
-                        <div className="container-fluid">
-                            <form className="d-flex" role="search">
-                                <input className="form-control me-4" type="search" placeholder="Search"
+
+                                <input className="form-control m-lg-4" type="search" placeholder="Search"
                                        aria-label="Search"/>
                                 <button className="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
-                <div className="navbar">
                     <NavLink className="nav-item nav-link" to="/carrito"><FaShoppingCart
                         className="cart-icon"/></NavLink>
-                </div>
-                <div className="navbar-nav ml-auto">
-                    <span>Bienvenido {dataUser ? dataUser.firstName : ''}</span>
-                </div>
-                <div className="m-3">
+
                     <div className="navbar-nav ml-auto ">
                         {isLoggedIn ? (
                             <NavLink className="nav-item nav-link" to="/profile">
@@ -102,12 +91,11 @@ export const Navbar = () => {
                             )}
                         </small>
                     </div>
-                </div>
                 <div className="navbar-nav ml-auto">
                     <NavLink className="nav-item nav-link" to="/register">Registrarse</NavLink>
                 </div>
-                <ul>
-                </ul>
         </nav>
+    <SubNavbar/>
+        </>
 );
 };

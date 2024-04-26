@@ -1,7 +1,6 @@
 import "./Footer.css"
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import {NavLink, useNavigate} from "react-router-dom";
-import pagosinter from "../../assets/Banners/envioGratis.png";
 
 export const Footer = () => {
     const navigate = useNavigate();

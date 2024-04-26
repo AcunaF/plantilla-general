@@ -1,0 +1,27 @@
+.subnav{
+    color: #f39c12
+}
+.linksorange {
+    display: flex;
+    justify-content: flex-end;
+    clear: both;
+    color: #f39c12;
+    font-size: 16px;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: color 0.3s ease;
+}
+.nav-container {
+}
+.end-links {
+    display: flex;
+}
+.nav-container {
+    display: flex;
+    justify-content: center;
+}
+.contacto-end{
+    display: flex;
+    justify-content: end;
+}
+

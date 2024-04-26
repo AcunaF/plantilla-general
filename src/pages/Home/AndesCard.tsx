@@ -4,19 +4,23 @@ import {FaShoppingCart} from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 import {CartContext} from "../../Auth/context/CartContext.tsx";
 import {useContext, useState} from "react";
+import { FiSearch } from 'react-icons/fi';
 import './AndesCard.css';
+
 
 interface TarjetaProductoProps {
     imageUrl: string;
+    price: number;
+    originalPrice: number;
 }
+
 export const TarjetaProducto = ({}: TarjetaProductoProps) => {
 
-    const [show, setShow] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     // @ts-ignore
     const { addToCart: addToCartContext } = useContext(CartContext);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => setSelectedProduct(null);
+    const handleShow = (prod: any) => setSelectedProduct(prod);
 
     const getAndesCardPruducts = () => fetch('https://peticiones.online/api/products')
         .then(response => {
@@ -39,6 +43,7 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
     }
 
     function addToCart(prod: any) {
+        alert("Producto agregado al carrito");
         console.log("agregado al carrito",prod);
         addToCartContext(prod);
         handleClose();
@@ -49,20 +54,22 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
             {data.results.slice(0, 4).map((prod: any, index: number) => (
                 <div className="andes-card" key={index}>
                     <img className="item-image" src={prod.image} alt={prod.name}/>
-                    <div className="item-description">
+                    <div className="d-grid item-description">
                         <h2>{prod.name}</h2>
                         <h4>$ {prod.price}</h4>
-                        <button className="btn" onClick={handleShow}>
-                            Ver más
+                        <button
+                            className="btn btn-outline-secondary" onClick={() => handleShow(prod)}>
+                            <FiSearch className="cart-icon"/><b className="cart-icon"> Ver</b>
                         </button>
-                        <button className="btn btn-">
-                            <NavLink className="btn btn-success" to="/carrito">
-                                <FaShoppingCart className="cart-icon"/>
+                        <button
+                            onClick={() => addToCart(prod)}
+                            className="btn btn-">
+                            <NavLink className="btn btn-outline-secondary" to="/carrito">
+                                <FaShoppingCart className="cart-icon"/><b  className="cart-icon"> Al carrito! </b>
                             </NavLink>
                         </button>
                     </div>
-
-                    <Modal show={show} onHide={handleClose}>
+                    <Modal show={selectedProduct === prod} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>{prod.name}</Modal.Title>
                         </Modal.Header>
@@ -74,7 +81,6 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-
                             <button onClick={() => addToCart(prod)}>Agregar al carrito</button>
                         </Modal.Footer>
                     </Modal>
