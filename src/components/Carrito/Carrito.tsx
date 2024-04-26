@@ -1,6 +1,7 @@
 import {useContext, useState,} from 'react';
 import {FaArrowLeft, FaMoneyBillWave, FaShoppingCart, FaTrashAlt} from 'react-icons/fa';
 import {NavLink, useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import './Carrito.css';
 import {CartContext} from "../../Auth/context/CartContext.tsx";
@@ -17,12 +18,35 @@ export const Carrito = () => {
     }
 
     const clearCart = () => {
-        alert('Su carrito esta vacio');
-        setItems([]);
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Vas a vaciar tu carrito",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, vaciar carrito',
+            cancelButtonText: 'No, cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Carrito vaciado',
+                    'Has vaciado tu carrito',
+                    'success'
+                )
+                setItems([]);
+            }
+        })
     };
 
     function handlePagar() {
-        alert('Gracias por su compra');
+        navigate('/pago');
+        Swal.fire({
+            icon: 'question',
+            title: 'Medio de pago',
+            text: ' Elije el medio de pago que prefieras',
+            confirmButtonText: 'Ver medios de pago'
+        });
         setItems([]);
     }
 
@@ -36,6 +60,12 @@ export const Carrito = () => {
         const updatedItems = [...items];
         updatedItems.splice(index, 1);
         setItems(updatedItems);
+        Swal.fire({
+            icon: 'info',
+            title: 'Producto eliminado',
+            text: 'Has eliminado un producto de tu carrito',
+            confirmButtonText: 'Entendido'
+        });
     }
 
     function calculateTotal() {

@@ -5,6 +5,8 @@ import {NavLink} from "react-router-dom";
 import {CartContext} from "../../Auth/context/CartContext.tsx";
 import {useContext, useState} from "react";
 import { FiSearch } from 'react-icons/fi';
+import Swal from 'sweetalert2';
+
 import './AndesCard.css';
 
 
@@ -43,7 +45,12 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
     }
 
     function addToCart(prod: any) {
-        alert("Producto agregado al carrito");
+        Swal.fire({
+            icon: 'success',
+            title: 'Producto agregado al carrito',
+            showConfirmButton: false,
+            timer: 1500
+        });
         console.log("agregado al carrito",prod);
         addToCartContext(prod);
         handleClose();
