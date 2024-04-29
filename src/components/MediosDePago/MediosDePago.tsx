@@ -8,38 +8,24 @@ import banelcoIcon from '../../assets/MediosPago/banelco-logo-F2A2A5BBEF-seeklog
 import rapipagoIcon from '../../assets/MediosPago/rapipago.png';
 import pagoFacilIcon from '../../assets/MediosPago/pago-facil.png';
 import Swal from "sweetalert2";
-//import MercadoPagoSDK from 'mercadopago'; // Importa el SDK de Mercado Pago
 
 export const MediosDePago = () => {
+
     const [mercadoPagoInitialized, setMercadoPagoInitialized] = useState(false);
 
     useEffect(() => {
-        // Inicializa Mercado Pago
- //       MercadoPagoSDK.setPublishableKey('TU_LLAVE_PUBLICA_DE_MERCADO_PAGO');
+
         setMercadoPagoInitialized(true);
     }, []);
 
 
-
-    /*function handlePagar() {
-        navigate('/pago');
+    const handlePagoMercadoPago = () => {
         Swal.fire({
             icon: 'success',
             title: 'Compra realizada',
             text: 'Gracias por tu compra',
             confirmButtonText: 'Genial'
         });
-        setItems([]);
-    }*/
-    const handlePagoMercadoPago = () => {
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Compra realizada',
-            text: 'Gracias por tu compra',
-            confirmButtonText: 'Genial'
-        });        // Lógica para procesar el pago mediante Mercado Pago
-        // Puedes utilizar la API de Mercado Pago para realizar el pago
     };
     const handlePagoBanelco = () => {
         Swal.fire({
@@ -48,8 +34,6 @@ export const MediosDePago = () => {
             text: 'Gracias por tu compra',
             confirmButtonText: 'Genial'
         });
-        // Lógica para procesar el pago mediante Banelco
-        // Puedes utilizar la API de Mercado Pago para realizar el pago
     };
     const handlePagoRapipago = () => {
         Swal.fire({
@@ -57,8 +41,7 @@ export const MediosDePago = () => {
             title: 'Compra realizada',
             text: 'Gracias por tu compra',
             confirmButtonText: 'Genial'
-        });        // Lógica para procesar el pago mediante Rapipago
-        // Puedes utilizar la API de Mercado Pago para realizar el pago
+        });
     };
     const handlePagoPagoFacil = () => {
         Swal.fire({
@@ -66,8 +49,7 @@ export const MediosDePago = () => {
             title: 'Compra realizada',
             text: 'Gracias por tu compra',
             confirmButtonText: 'Genial'
-        });        // Lógica para procesar el pago mediante Pago Fácil
-        // Puedes utilizar la API de Mercado Pago para realizar el pago
+        });
     };
 
 
