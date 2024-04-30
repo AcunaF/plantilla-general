@@ -8,7 +8,7 @@ export const CardsNew = () => {
     const itemsPerPage = 6;
 
     useEffect(() => {
-        fetch(`http://localhost:5005/api/galeriaCul`)
+        fetch(`http://localhost:8080/api/galeriaCul`)
             .then((response) => response.json())
             .then((data) => setGaleriaCul(data.items))
             .catch(err => console.log(`Error`, err));

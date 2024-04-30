@@ -1,14 +1,12 @@
-import { Modal, Button } from 'react-bootstrap';
+import {Modal, Button, Col, Row} from 'react-bootstrap';
 import {useQuery} from "react-query";
 import {FaShoppingCart} from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 import {CartContext} from "../../Auth/context/CartContext.tsx";
 import {useContext, useState} from "react";
-import { FiSearch } from 'react-icons/fi';
+import {FiSearch} from 'react-icons/fi';
 import Swal from 'sweetalert2';
-
 import './AndesCard.css';
-
 
 interface TarjetaProductoProps {
     imageUrl: string;
@@ -20,7 +18,7 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
 
     const [selectedProduct, setSelectedProduct] = useState(null);
     // @ts-ignore
-    const { addToCart: addToCartContext } = useContext(CartContext);
+    const {addToCart: addToCartContext} = useContext(CartContext);
     const handleClose = () => setSelectedProduct(null);
     const handleShow = (prod: any) => setSelectedProduct(prod);
 
@@ -51,8 +49,21 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
             showConfirmButton: false,
             timer: 1500
         });
-        console.log("agregado al carrito",prod);
+        console.log("agregado al carrito", prod);
+        // Recupera el carrito actual del localStorage
+        const currentCart = localStorage.getItem("carrito");
+
+        // Parsea el carrito a un array si existe, si no, inicializa un array vacío
+        const cartItems = currentCart ? JSON.parse(currentCart) : [];
+
+        // Agrega el nuevo producto al array
+        cartItems.push(prod);
+
+        // Convierte el array actualizado a JSON y guárdalo en el localStorage
+        localStorage.setItem("carrito", JSON.stringify(cartItems));
+
         addToCartContext(prod);
+        console.log("carrito", cartItems); // Imprime el array actualizado en la consola
         handleClose();
     }
 
@@ -72,25 +83,27 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
                             onClick={() => addToCart(prod)}
                             className="btn btn-">
                             <NavLink className="btn btn-outline-secondary" to="/carrito">
-                                <FaShoppingCart className="cart-icon"/><b  className="cart-icon"> Al carrito! </b>
+                                <FaShoppingCart className="cart-icon"/><b className="cart-icon"> Al carrito! </b>
                             </NavLink>
                         </button>
                     </div>
-                    <Modal show={selectedProduct === prod} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>{prod.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <img src={prod.image} alt={prod.name}/>
-                            <h4>$ {prod.price}</h4>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
-                            </Button>
-                            <button onClick={() => addToCart(prod)}>Agregar al carrito</button>
-                        </Modal.Footer>
-                    </Modal>
+                    <div className="modalOferta">
+                        <Modal show={selectedProduct === prod} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>{prod.name}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <img src={prod.image} alt={prod.name}/>
+                                <h4>$ {prod.price}</h4>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <button onClick={() => addToCart(prod)}>Agregar al carrito</button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
                 </div>
             ))}
         </div>

@@ -7,7 +7,7 @@ export const ImageCarousel = () => {
     const [galeria, setGaleria] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5005/api/galeria`)
+        fetch(`http://localhost:8080/api/galeria`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("No se pudo obtener la galería de imágenes");
@@ -22,9 +22,10 @@ export const ImageCarousel = () => {
         <MDBCarousel showControls showIndicators touch={true}>
             {galeria.map((item, index) => {
                 if (index < 10) {
+                    // @ts-ignore
                     return (
                         <MDBCarouselItem itemId={index + 1} key={index}>
-                            <img src={item.imagen} className='d-block w-100 carousel-image' alt={`Imagen ${index + 1}`} />
+                            <img src={item.imagen} className='d-block w-100 carousel-image' alt={`Imagen' ${index + 1}`} />
                         </MDBCarouselItem>
                     );
                 } else {

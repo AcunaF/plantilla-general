@@ -13,7 +13,7 @@ export const CarouselQuery = () => {
     const { dataUser, setDataUser } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch (`http://localhost:5004/api/galeriaRaq`)
+        fetch (`http://localhost:8080/api/galeriaRaq`)
             .then((response) => response.json())
             .then((data) => setGaleria(data.items))
             .catch (err => console.log(`Error`,err));

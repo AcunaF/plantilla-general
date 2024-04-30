@@ -1,44 +1,51 @@
+import { NavLink, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
-import { NavLink } from "react-router-dom";
+import { Nav, NavDropdown} from "react-bootstrap";
 
+// @ts-ignore
 export const SubNavbar = ({ isLoggedIn }) => {
+    const categories = ["Vehiculos", "Inmuebles", "Supermercados", "Tecnologia", "Hogar y Muebles", "Electrodomesticos", "Herramientas", "Deportes y fitness", "accesorios para vehiculos", "Juegos y juguetes", "bebes"]; // Tus categorías
+    const navigate = useNavigate();
+
     return (
         <div className="subnav">
-            <ul className="nav navbar-dark bg-dark nav-container mb-3">
+            <Nav className="nav navbar-dark bg-dark nav-container mb-3">
                 <small className="mb-1">
                     <NavLink className="nav-item nav-link" to="/ReactQuery">Ofertas</NavLink>
                 </small>
                 {isLoggedIn && (
                     <>
                         <small className="">
-                            <NavLink className="nav-item nav-link" to="/historial">Historial</NavLink>
+                            <NavLink className="nav-item nav-link" to="/history">Historial</NavLink>
                         </small>
                         <small className="">
-                            <NavLink className="nav-item nav-link" to="/miscompras">Mis compras</NavLink>
+                            <NavLink className="nav-item nav-link" to="/oferta">Mis compras</NavLink>
                         </small>
                         <small className="">
                             <NavLink className="nav-item nav-link" to="/favoritos">Favoritos</NavLink>
                         </small>
                     </>
                 )}
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-expanded="false">Categorias</a>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">Ofertas</a></li>
-                        <li><a className="dropdown-item" href="#">Historial</a></li>
-                        <li><a className="dropdown-item" href="#">Mis Compras</a></li>
-                        <li>
-                            <hr className="dropdown-divider" />
-                        </li>
-                    </ul>
-                </li>
+                <NavDropdown
+                    id="nav-dropdown-dark-example"
+                    title="Categorias"
+                    menuVariant="dark"
+                >
+                    {categories.map((category, index) => (
+                        <NavDropdown.Item
+                            key={index}
+                            onClick={() => navigate('/categorias', {state: {categoryName: category}})}
+                        >
+                            {category}
+                        </NavDropdown.Item>
+                    ))}
+                </NavDropdown>
                 <li className="contacto-end">
                     <div className="row-gap-4">
                         <NavLink className="nav-item nav-link" to="/contacto">Contacto</NavLink>
                     </div>
                 </li>
-            </ul>
+            </Nav>
         </div>
     );
 };

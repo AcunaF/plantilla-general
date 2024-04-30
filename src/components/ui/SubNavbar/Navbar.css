@@ -1,6 +1,9 @@
-.subnav{
-    color: #f39c12
+.subnav {
+    transition: color 0.3s ease;
+    color: #f39c12;
+    font-size: 16px;
 }
+
 .linksorange {
     display: flex;
     justify-content: flex-end;
@@ -11,17 +14,37 @@
     margin-left: 25px;
     transition: color 0.3s ease;
 }
-.nav-container {
-}
-.end-links {
-    display: flex;
-}
+
 .nav-container {
     display: flex;
     justify-content: center;
 }
-.contacto-end{
+
+.contacto-end {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+}
+
+.dropdown-button {
+    display: flex;
+    justify-content: center;
+    color: #f39c12;
+    font-size: 16px;
+    text-decoration: none;
+    margin-left: 25px;
+}
+.select-category {
+    padding: 2px;
+    color: #f39c12; /* Color de texto */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    font-size: 18px;
+    margin-left: 10px; /* Ajuste el margen según sea necesario */
+}
+
+.select-category option {
+    color: #f39c12; /* Color de texto */
+    background-color: #343a40; /* Fondo del elemento */
+    border: none; /* Sin borde */
 }
 

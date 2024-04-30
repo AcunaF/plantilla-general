@@ -1,25 +1,38 @@
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import prn from "../../assets/Banners/PRNews.io4_.jpg";
 import "./CardsTitle.css"
+import {useEffect, useState} from "react";
 
 export const CardsTitle = () => {
+    const [imagenCard, setImagenCard] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/api/galeriaR`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("No se pudo obtener la galería de imágenes");
+                }
+                return response.json();
+            })
+            .then((data) => setImagenCard(data.items.slice(0, 10)))
+            .catch(err => console.error('Error al obtener la galería:', err));
+    }, []);
+
     return (
-        <div className="row-cols-lg-1">
+
+        <div className="cols-cols-3">
             <Row
-                xs={1} md={2} className="Cards-container  g-2">
-                {Array.from({length: 6}).map((_, idx) => (
-                    <Col key={idx}>
-                        <Card
-                        className="Card"
-                        >
-                            <Card.Img variant="top" src={prn}/>
+                xs={1} md={3} >
+                {imagenCard.slice(0, 6).map((item, index) => (
+                    <Col
+                        className="Cards-container"
+                        key={index}>
+                        <Card  className="Card">
+                            <Card.Img variant="top" src={item.imagen} />
                             <Card.Body>
-                                <Card.Title>Card title</Card.Title>
+                                <Card.Title>{item.fecha}</Card.Title>
                                 <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit
-                                    longer.
+                                    {item.volanta}
                                 </Card.Text>
                             </Card.Body>
                         </Card>

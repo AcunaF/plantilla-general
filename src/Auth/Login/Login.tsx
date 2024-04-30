@@ -24,7 +24,7 @@ export const LoginForm = () => {
 
     // @ts-ignore
     const handleLogin = (values, { setSubmitting }) => {
-        fetch('http://localhost:5004/auth/login', {
+        fetch('http://localhost:8080/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

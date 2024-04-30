@@ -8,7 +8,7 @@ export const Cards = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5005/api/galeriaLibro')
+        fetch('http://localhost:8080/api/galeriaLibro')
             .then((response) => response.json())
             .then((dataR) => setData(dataR.items))
             .catch(err => console.log(`Error`, err));
