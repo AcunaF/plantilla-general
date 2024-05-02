@@ -1,4 +1,4 @@
-import {Modal, Button, Col, Row} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 import {useQuery} from "react-query";
 import {FaShoppingCart} from "react-icons/fa";
 import {NavLink} from "react-router-dom";
@@ -6,6 +6,8 @@ import {CartContext} from "../../Auth/context/CartContext.tsx";
 import {useContext, useState} from "react";
 import {FiSearch} from 'react-icons/fi';
 import Swal from 'sweetalert2';
+import { motion } from 'framer-motion';
+import {FaHeart, FaRegHeart} from "react-icons/fa";
 import './AndesCard.css';
 
 interface TarjetaProductoProps {
@@ -15,12 +17,56 @@ interface TarjetaProductoProps {
 }
 
 export const TarjetaProducto = ({}: TarjetaProductoProps) => {
-
+    const [isFavoriteBody, isetIFavoriteBody] = useState<Record<string, boolean>>(() => {
+        const savedFavorites = localStorage.getItem("favourites");
+        return savedFavorites ? JSON.parse(savedFavorites) : {};
+    });
     const [selectedProduct, setSelectedProduct] = useState(null);
     // @ts-ignore
     const {addToCart: addToCartContext} = useContext(CartContext);
     const handleClose = () => setSelectedProduct(null);
     const handleShow = (prod: any) => setSelectedProduct(prod);
+
+    const toggleFavourite = (name: string) => {
+        if (isFavoriteBody[name]) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¿Deseas eliminar este producto de tus favoritos?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    isetIFavoriteBody({
+                        ...isFavoriteBody,
+                        [name]: !isFavoriteBody[name]
+                    });
+                    localStorage.setItem("favourites", JSON.stringify(isFavoriteBody));
+                    Swal.fire(
+                        'Eliminado',
+                        'El producto ha sido eliminado de tus favoritos.',
+                        'success'
+                    );
+                }
+            })
+        } else {
+            isetIFavoriteBody({
+                ...isFavoriteBody,
+                [name]: !isFavoriteBody[name]
+            });
+            localStorage.setItem("favourites", JSON.stringify(isFavoriteBody));
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto agregado a favoritos',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+        console.log("favorito",isFavoriteBody);
+    }
 
     const getAndesCardPruducts = () => fetch('https://peticiones.online/api/products')
         .then(response => {
@@ -66,14 +112,25 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
         console.log("carrito", cartItems); // Imprime el array actualizado en la consola
         handleClose();
     }
-
+    // @ts-ignore
     return (
-        <div className="contenedorofert">
+        <div className="container">
+        <motion.div
+            className="contenedorofert"
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 1}}
+        >
             {data.results.slice(0, 4).map((prod: any, index: number) => (
                 <div className="andes-card" key={index}>
                     <img className="item-image" src={prod.image} alt={prod.name}/>
                     <div className="d-grid item-description">
-                        <h2>{prod.name}</h2>
+                        <h5>{prod.name}
+                            <button onClick={() => toggleFavourite(prod.name)} className="favourite-button">
+                                {isFavoriteBody[prod.name] ? <FaHeart/> : <FaRegHeart/>}
+                            </button>
+                        </h5>
+
                         <h4>$ {prod.price}</h4>
                         <button
                             className="btn btn-outline-secondary" onClick={() => handleShow(prod)}>
@@ -106,6 +163,7 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
                     </div>
                 </div>
             ))}
+        </motion.div>
         </div>
     );
 };

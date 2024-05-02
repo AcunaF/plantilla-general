@@ -3,9 +3,9 @@ import {FaArrowLeft, FaCheckCircle, FaMoneyBillWave, FaTrashAlt} from 'react-ico
 import {NavLink, useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {CartContext} from "../../Auth/context/CartContext.tsx";
-
-import './Carrito.css';
 import {Card, Col, Row} from "react-bootstrap";
+import './Carrito.css';
+
 
 export const Carrito = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -81,7 +81,7 @@ export const Carrito = () => {
 
                 {cartItems.map((item, index) => (
                     <Col
-                        className="cards-container"
+                        className="container-carrito"
                         key={index}>
                         <Card className="card">
                             <Card.Img

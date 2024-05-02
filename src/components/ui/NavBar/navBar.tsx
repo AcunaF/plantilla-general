@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../auth/context/AuthContext';
-import { FaShoppingCart } from 'react-icons/fa';
+import {FaShoppingCart, FaSignInAlt, FaSignOutAlt} from 'react-icons/fa';
 import './stylesNav.css';
 import imagenLogo from '../../../assets/company/logo.jpg';
 import { SubNavbar } from "../SubNavbar/SubNavbar.tsx";
@@ -62,7 +62,7 @@ export const Navbar = () => {
                 </div>
                 {isLoggedIn && (
                     <NavLink className="nav-item nav-link" to="/carrito">
-                        <FaShoppingCart className="cart-icon" /> Mi carrito
+                        <FaShoppingCart className="cart-icon" />
                     </NavLink>
                 )}
                 <div className="navbar-nav ml-auto ">
@@ -73,14 +73,14 @@ export const Navbar = () => {
                             </NavLink>
                             <small>
                                 <NavLink className="nav-item nav-link" to="/" onClick={handleLogOut}>
-                                    LogOut
+                                    <FaSignOutAlt /> Logout
                                 </NavLink>
                             </small>
                         </>
                     ) : (
                         <small>
                             <NavLink className="nav-item nav-link" to="/login">
-                                Login
+                                <FaSignInAlt /> Login
                             </NavLink>
                         </small>
                     )}

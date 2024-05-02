@@ -1,7 +1,7 @@
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import "./CardsTitle.css"
 import {useEffect, useState} from "react";
+import "./CardsTitle.css"
 
 export const CardsTitle = () => {
     const [imagenCard, setImagenCard] = useState([]);
@@ -19,13 +19,13 @@ export const CardsTitle = () => {
     }, []);
 
     return (
-
+<div className="cardMarket-container">
         <div className="cols-cols-3">
             <Row
                 xs={1} md={3} >
                 {imagenCard.slice(0, 6).map((item, index) => (
                     <Col
-                        className="Cards-container"
+                        className=""
                         key={index}>
                         <Card  className="Card">
                             <Card.Img variant="top" src={item.imagen} />
@@ -40,5 +40,6 @@ export const CardsTitle = () => {
                 ))}
             </Row>
         </div>
+</div>
     );
 }

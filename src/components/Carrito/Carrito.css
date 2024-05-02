@@ -56,7 +56,6 @@
     padding: 5px 10px;
     cursor: pointer;
 }
-
 .total-label {
     font-weight: bold;
 }
@@ -83,7 +82,9 @@
     cursor: pointer;
 }
 
-.cards-container{
+.container-carrito{
+    padding: 10px;
+    margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,0 +1,32 @@
+.favorite-container {
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.btn-btnFavorite {
+    margin-top: 20px;
+}
+.card {
+    width: auto;
+}
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+.row-cols-sm-3{
+    width: auto;
+    height: auto;
+    padding: 20px;
+    margin: 5px;
+}
+.favorite-container h1 {
+    font-family: Arial, sans-serif;
+}
+
+
+

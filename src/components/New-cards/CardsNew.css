@@ -4,6 +4,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .card-expanded {
     width: auto;
     height: auto;
@@ -18,5 +29,17 @@
     text-overflow: ellipsis;
 }
 .text-expanded {
+    display: block;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.card .card-img-top {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    margin: auto;
     display: block;
 }

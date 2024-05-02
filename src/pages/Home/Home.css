@@ -21,13 +21,12 @@
         grid-column: 4 / span 3;
         margin-top: 20px;
 }
-.contenedor-supermercado {
+.container-market{
     border-radius: 10px;
     width: auto;
     display: flex;
     flex-wrap: wrap;
 }
-
 .tarjeta {
     width: 350px;
     margin: 5px;

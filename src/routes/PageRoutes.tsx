@@ -17,7 +17,7 @@ import {ReactQuery} from "../pages/Query/ReactQuery.tsx";
 import {Carrito} from "../components/Carrito/Carrito.tsx";
 // @ts-ignore
 import {Contacto} from "../pages/Contacto.jsx";
-import {Favoritos} from "../pages/Favoritos.tsx";
+import {Favoritos} from "../pages/Favorite/Favoritos.tsx";
 import "../components/ui/NavBar/stylesNav.css";
 import "./Routes.css"
 import {Navbar} from "../components/ui/NavBar/navBar.tsx";

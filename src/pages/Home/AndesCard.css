@@ -9,12 +9,33 @@
     display: flex;
     flex-direction: column;
 }
+.contenedorofert {
+    border-radius: 5px;
+    box-shadow: #343a40;
+    text-shadow: 0px 0px 1px #000;
+    Width: 110%;
+    display: flex;
+    justify-content: center;
+}
 
+/* Para tablets */
+@media (max-width: 768px) {
+    .contenedorofert {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+/* Para móviles */
+@media (max-width: 500px) {
+    .contenedorofert {
+        flex-direction: column;
+        width: 100%;
+    }
+}
 .andes-card .prod-image img {
     max-width: 40%;
     height: auto;
 }
-
 .andes-card .prod-description {
     display: flex;
     padding: 16px;
@@ -35,26 +56,24 @@
     color: #999999;
 }
 
-.andes-card p {
+.andes-card {
     font-size: 10px;
     color: #3366cc;
 }
-.contenedorofert{
+.tarjeta {
+    border: 1px solid #ccc;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
     box-shadow: #343a40;
     text-shadow: 0px 0px 1px #000;
-    Width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.tarjeta {
-    justify-content: center;
-    align-items: center;
-    width: 400px;
+    width: 280px;
     margin: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
-
+.favourite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+}
