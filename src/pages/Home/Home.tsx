@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {ImageCarousel} from "./Carousel.tsx";
 // @ts-ignore
-import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.jsx";
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.tsx";
 import {useQuery} from "react-query";
 import {TarjetaProducto} from "./AndesCard.tsx";
 import prn from "../../assets/Banners/PRNews.io4_.jpg";

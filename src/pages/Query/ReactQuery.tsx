@@ -3,14 +3,12 @@ import {ProductQuery} from "./Queryviews.tsx";
 import "./Styles.css"
 import {ImageCarousel} from "../Home/Carousel.tsx";
 import {
-    MDBAccordion,
-    MDBAccordionItem,
     MDBBadge,
     MDBListGroup,
     MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import {Cards} from "../../components/Card/Cards.tsx";
-import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter";
+import {CarouselFooter} from "../../components/footer/CarouselFooter/CarouselFooter.tsx";
 
 export const ListGroupComponent = () => (
     <MDBListGroup light numbered style={{minWidth: '22rem'}}>

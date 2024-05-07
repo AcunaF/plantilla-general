@@ -27,7 +27,8 @@ export const Employes = () => {
         Imagenb: '',
         FechaIngreso: '',
         Cargo: '',
-        Salario: ''
+        Salario: '',
+        Description: ''
     };
     const validationSchema = Yup.object().shape({
         Nombre: Yup.string().required('Required'),
@@ -40,7 +41,8 @@ export const Employes = () => {
         CodigoPostal: Yup.string().required('Required'),
         FechaIngreso: Yup.string().required('Required'),
         Cargo: Yup.string().required('Required'),
-        Salario: Yup.string().required('Required')
+        Salario: Yup.string().required('Required'),
+        Description: Yup.string().required('Required')
 
     });
 
@@ -64,7 +66,8 @@ export const Employes = () => {
                     FechaIngreso: values.FechaIngreso,
                     Cargo: values.Cargo,
                     Salario: values.Salario,
-                    Imageb: values.Imageb
+                    Imageb: values.Imageb,
+                    Description: values.Description,
                 },
             ]);
 
@@ -152,6 +155,7 @@ export const Employes = () => {
                                 <Field type="text" name="CodigoPostal" placeholder="CP" className="form-control"/>
                                 <ErrorMessage name="CodigoPostal" component="div" className="text-danger"/>
                             </div>
+
                             <div
                                 onClick={uploadImage}
                                 className="form-group">
@@ -170,6 +174,12 @@ export const Employes = () => {
                             <div className="form-group">
                                 <Field type="text" name="Salario" placeholder="Salary" className="form-control"/>
                                 <ErrorMessage name="Salario" component="div" className="text-danger"/>
+                            </div>
+                            <br/>
+                            <div className="form-group">
+                                <Field type="text" name="Description" placeholder="Description del empleado"
+                                       className="form-control"/>
+                                <ErrorMessage name="Description" component="div" className="text-danger"/>
                             </div>
                             <button type="submit" disabled={isSubmitting} className="btn btn-success">
                                 Submit

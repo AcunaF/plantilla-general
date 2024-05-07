@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { supabase } from '../../../models/supa.connect.js';
-import ButtonComponent from "../buttons/button";
+import ButtonComponent from "../buttons/button.tsx";
 import { FaCheckSquare, FaSquare } from 'react-icons/fa';
 
-export const SaleForm = ({ onReset }) => {
+export const SaleForm = () => {
     const [formData, setFormData] = useState({
         marca: '',
         categoria: '',

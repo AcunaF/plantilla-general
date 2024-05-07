@@ -125,13 +125,8 @@ export const Search = () => {
                                             <Card.Link href="/print"><SlPrinter/> <span></span></Card.Link>
                                         </Card.Link>
                                         <Card.Text>
-                                            <b> Employee description:</b> <br/>
-                                            <span> Confiabilidad. Busca empleados en los que puedas contar para llegar a tiempo y terminar sus tareas. ...
-                                                    Entrega. ...
-                                                        Trabajo en equipo. ...
-                                        </span>
+                                            <ListGroup.Item>Descripcion : {employee['Description']}</ListGroup.Item>
                                         </Card.Text>
-
                                     </Card.Body>
                                     <ListGroup className="list-group-flush"
                                                style={{width: '20rem', height: 'auto'}}>

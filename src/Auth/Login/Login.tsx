@@ -68,6 +68,7 @@ export const LoginForm = () => {
         } catch (error) {
             console.error('Error:', error);
             setAttempts(prevAttempts => prevAttempts - 1);
+            // @ts-ignore
             Swal.fire({
                 icon: 'error',
                 title: 'Error de inicio de sesión',

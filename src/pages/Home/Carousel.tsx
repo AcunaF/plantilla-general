@@ -17,7 +17,6 @@ export const ImageCarousel = () => {
             .then((data) => setGaleria(data.items.slice(0, 10)))
             .catch(err => console.error('Error al obtener la galería:', err));
     }, []);
-
     return (
         <MDBCarousel showControls showIndicators touch={true}>
             {galeria.map((item, index) => {

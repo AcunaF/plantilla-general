@@ -20,6 +20,7 @@ function App() {
         setCartItems(newCartItems);
     };
 
+    // @ts-ignore
     return (
         <CartContext.Provider value={{items: cartItems, addToCart, removeItem}}>
             <QueryClientProvider client={queryClient}>

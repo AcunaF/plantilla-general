@@ -15,6 +15,7 @@ import {ChatBot} from "../components/ChatBot/ChatBot.tsx";
 import {Search} from "../components/Search/Search.tsx";
 import {ReactQuery} from "../pages/Query/ReactQuery.tsx";
 import {Carrito} from "../components/Carrito/Carrito.tsx";
+// @ts-ignore
 import {Employes} from "../components/Employees/Employes.jsx";
 // @ts-ignore
 import {Contacto} from "../pages/Contacto.jsx";
@@ -31,7 +32,6 @@ import {CategoryFiles} from "../components/Categorias/CategoryFiles.tsx";
 import {PopoverTittle} from "../components/Popover/popoverTittle.tsx";
 
 export const PageRoutes = () => {
-
     return (
         <AuthProvider>
             <div>
@@ -67,7 +67,6 @@ export const PageRoutes = () => {
                     {/**/}
                     <Route path={"popover"} element={<PopoverTittle />} />
                     <Route path={"*"} element={<h1>Not Found</h1>}/>
-
                 </Routes>
             </div>
         </AuthProvider>

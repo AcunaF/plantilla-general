@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBRow } from 'mdb-react-ui-kit';
 import './cardsStyles.css';
 import { supabase } from '../../models/supa.connect';
 
 export const Cards = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Item[]>([]);
+    interface Item {
+        imagen: string;
+        id_imagen: string;
+        categoria: string;
+        // Add other properties as needed
+    }
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -16,6 +23,7 @@ export const Cards = () => {
             if (error) {
                 console.error('Error fetching products: ', error);
             } else {
+                // @ts-ignore
                 setData(data)
             }
         };
@@ -23,6 +31,7 @@ export const Cards = () => {
         fetchProducts();
     }, []);
 
+    // @ts-ignore
     return (
         <div className="container">
             <div className="row row-cols-1 row-cols-md-3 g-4">
