@@ -16,6 +16,14 @@ interface TarjetaProductoProps {
     originalPrice: number;
 }
 
+interface FavoriteProduct {
+    imageUrl: string;
+    price: number;
+    category: string;
+    name: string;
+}
+
+
 export const TarjetaProducto = ({}: TarjetaProductoProps) => {
     const [isFavoriteBody, isetIFavoriteBody] = useState<Record<string, boolean>>(() => {
         const savedFavorites = localStorage.getItem("favourites");
@@ -27,37 +35,24 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
     const handleClose = () => setSelectedProduct(null);
     const handleShow = (prod: any) => setSelectedProduct(prod);
 
-    const toggleFavourite = (name: string) => {
-        if (isFavoriteBody[name]) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¿Deseas eliminar este producto de tus favoritos?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    isetIFavoriteBody({
-                        ...isFavoriteBody,
-                        [name]: !isFavoriteBody[name]
-                    });
-                    localStorage.setItem("favourites", JSON.stringify(isFavoriteBody));
-                    Swal.fire(
-                        'Eliminado',
-                        'El producto ha sido eliminado de tus favoritos.',
-                        'success'
-                    );
-                }
-            })
+    const toggleFavourite = (product: FavoriteProduct) => {
+        const savedFavorites = localStorage.getItem("favorites");
+        let favorites: FavoriteProduct[] = savedFavorites ? JSON.parse(savedFavorites) : [];
+
+        // Verifica si el producto ya está en favoritos
+        const index = favorites.findIndex(fav => fav.name === product.name);
+
+        if (index !== -1) {
+            // Si el producto ya está en favoritos, elimínalo
+            favorites.splice(index, 1);
+            Swal.fire(
+                'Eliminado',
+                'El producto ha sido eliminado de tus favoritos.',
+                'success'
+            );
         } else {
-            isetIFavoriteBody({
-                ...isFavoriteBody,
-                [name]: !isFavoriteBody[name]
-            });
-            localStorage.setItem("favourites", JSON.stringify(isFavoriteBody));
+            // Si el producto no está en favoritos, agrégalo
+            favorites.push(product);
             Swal.fire({
                 icon: 'success',
                 title: 'Producto agregado a favoritos',
@@ -65,8 +60,18 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
                 timer: 1500
             });
         }
-        console.log("favorito",isFavoriteBody);
-    }
+
+        // Guarda los productos favoritos actualizados en el almacenamiento local
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+
+        // Actualiza el estado si es necesario
+        isetIFavoriteBody({
+            ...isFavoriteBody,
+            [product.name]: !isFavoriteBody[product.name]
+        });
+
+        console.log("favoritos guardados en array ", favorites);
+    };
 
     const getAndesCardPruducts = () => fetch('https://peticiones.online/api/products')
         .then(response => {
@@ -112,6 +117,10 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
         console.log("carrito", cartItems); // Imprime el array actualizado en la consola
         handleClose();
     }
+    const handleAddToFavorite = () => {
+
+    };
+
     // @ts-ignore
     return (
         <div className="container">
@@ -126,9 +135,10 @@ export const TarjetaProducto = ({}: TarjetaProductoProps) => {
                     <img className="item-image" src={prod.image} alt={prod.name}/>
                     <div className="d-grid item-description">
                         <h5>{prod.name}
-                            <button onClick={() => toggleFavourite(prod.name)} className="favourite-button">
+                            <button onClick={() => toggleFavourite(prod)} className="favourite-button">
                                 {isFavoriteBody[prod.name] ? <FaHeart/> : <FaRegHeart/>}
                             </button>
+
                         </h5>
 
                         <h4>$ {prod.price}</h4>

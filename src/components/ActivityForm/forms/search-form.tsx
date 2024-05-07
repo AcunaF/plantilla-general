@@ -1,89 +1,80 @@
-import React, {useState, useEffect} from 'react';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { supabase } from '../../../models/supa.connect.js';
 import ButtonComponent from "../buttons/button";
+import { FaCheckSquare, FaSquare } from 'react-icons/fa';
 
-export const SearchForm = ({onReset}) => {
-
+export const SaleForm = ({ onReset }) => {
     const [formData, setFormData] = useState({
+        marca: '',
         categoria: '',
         area: '',
-        subArea: '',
+        subarea: '',
         nombre: '',
         talle: '',
         color: '',
         precio: '',
         descripcion: '',
-        imagen: '',
-        ingresar: '',
+        imagen: null,
+        oferta: false,
     });
-    const [marcas, setMarcas] = useState([]);
-    const [categoria, setCategoria] = useState([]);
-    const [areas, setAreas] = useState([]);
-    const [subAreas, setSubAreas] = useState([]);
-    const [nombre, setNombre] = useState(null);
-    const [talle, setTalle] = useState(null);
-    const [color, setColor] = useState(null);
-    const [precio, setPrecio] = useState(null);
-    const [descripcion, setDescripcion] = useState(null);
-    const [imagen, setImagen] = useState(null);
-    const [ingresar, setIngresar] = useState(null);
 
-    //reseteo del formulario
-    const handleReset = (e) => {
-        e.preventDefault();
-        setFormData({
-            marca: '',
-            categoria: '',
-            area: '',
-            subArea: '',
-            nombre: '',
-            talle: '',
-            color: '',
-            precio: '',
-            descripcion: '',
-            imagen: '',
-        });
-        setCategoria([]);
-        setAreas([]);
-        setSubAreas([]);
-        setNombre(null);
-        setTalle(null);
-        setColor(null);
-        setPrecio(null);
-        setDescripcion(null);
-        setImagen(null);
-        setIngresar(null);
-
-
-    };
-    const handleChange = (e) => {
-        const {name, value} = e.target;
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
         });
     };
 
-    const handleSubmit = async (e) => {
-        console.log('formData:', formData);
+    const handleChangeImage = (e: { target: { files?: any; name?: any; }; }) => {
+        const { name } = e.target;
+        const file = e.target.files[0];
+        setFormData({
+            ...formData,
+            [name]: file,
+        });
+    };
+
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
-           alert('Se ha ingresado correctamente');
+            const { error } = await supabase
+                .from('Sale_Products')
+                .insert([formData]);
+
+            if (error) {
+                console.error('Error insertando producto:', error);
+                return;
+            }
+
+            alert('Se ha ingresado correctamente');
         } catch (error) {
             console.error('Error en la solicitud al servidor:', error);
         }
-
     };
 
-    useEffect(() => {
-
-
-    }, []);
+    const handleReset = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+        setFormData({
+            marca: '',
+            categoria: '',
+            area: '',
+            subarea: '',
+            nombre: '',
+            talle: '',
+            color: '',
+            precio: '',
+            descripcion: '',
+            imagen: null,
+            oferta: false,
+        });
+    };
 
     return (
-        <div className=" col-md-12 ">
+        <div className=" container ">
             <div className="row">
-                <div className="container-fluid col-md-8 ">
+                <div className="container-fluid col-md-12 ">
                     <form
                         className="row"
                         onSubmit={handleSubmit}>
@@ -123,9 +114,6 @@ export const SearchForm = ({onReset}) => {
                                 <option value="Indumentaria">Indumentaria</option>
                                 <option value="Calzado">Calzado</option>
                                 <option value="Accesorios">Accesorios</option>
-
-
-
                             </select>
                         </div>
                         <div className="row mb-3">
@@ -138,20 +126,22 @@ export const SearchForm = ({onReset}) => {
                                 onReset={handleReset}
                             >
                                 <option key=" " value=" "> Elige el tipo de area</option>
+                                <option key="Ropa" value="Ropa">Accesorios</option>
                                 <option key="Jeans" value="Jeans ">Jeans</option>
                                 <option key="Remeras" value="Remeras">Remeras</option>
                                 <option key="Camperas" value="Camperas">Camperas</option>
                                 <option key="Zapatillas" value="Zapatillas">Zapatillas</option>
+                                <option key="Zapatos" value="Zapatos">Otros/as</option>
 
                             </select>
                         </div>
                         <div className="row mb-3">
-                            <label htmlFor="subArea">
+                            <label htmlFor="subarea">
                                 Subárea:
                                 <select
                                     className="form-control"
-                                    name="subArea"
-                                    value={formData.subArea}
+                                    name="subarea"
+                                    value={formData.subarea}
                                     onChange={handleChange}
                                 >
                                     <option key=" " value=" ">Seleccione una subárea</option>
@@ -159,6 +149,7 @@ export const SearchForm = ({onReset}) => {
                                     <option key="Jeans " value=" ">Jeans</option>
                                     <option key="Camperas " value=" ">Camperas</option>
                                     <option key="Zapatillas " value=" ">Zapatillas</option>
+                                    <option key="Otros " value=" ">Otros</option>
                                 </select>
                             </label>
                         </div>
@@ -203,7 +194,6 @@ export const SearchForm = ({onReset}) => {
                                     <option key="Azul " value=" ">Azul</option>
                                     <option key="Verde " value=" ">Verde</option>
                                     <option key="Amarillo " value=" ">Amarillo</option>
-
                                 </select>
                             </label>
                         </div>
@@ -237,23 +227,34 @@ export const SearchForm = ({onReset}) => {
                         <div className="col-md-4 mb-3">
                             <label>Subi imagen
                                 <input
+                                    type="file"
                                     className="form-control"
-                                    name="Imagen"
-                                    value={formData.imagen}
-                                    onChange={handleChange}
-                                    placeholder="solo formatos .jpg, .png, .jpeg"
+                                    name="imagen"
+                                    onChange={handleChangeImage}
                                 />
                             </label>
                         </div>
+
                         <div>
                             <ButtonComponent
                                 handleSubmit={handleSubmit}
                                 handleReset={handleReset}
                             />
+                            <div className="col-md-4 mb-3">
+                                <label>Oferta
+                                    <button
+                                        type='button'
+                                        className="form-control"
+                                        name="oferta"
+                                        onClick={() => setFormData({...formData, oferta: !formData.oferta})}
+                                    >
+                                        {formData.oferta ? <FaCheckSquare/> : <FaSquare/>}
+                                    </button>
+                                </label>
+                            </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     );

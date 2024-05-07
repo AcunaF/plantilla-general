@@ -2,7 +2,10 @@ import {Formik, Field, Form} from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import  { supabase }   from '../models/supa.connect.tsx';
+import Swal from "sweetalert2";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 const VALID_PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$/;
 
 const SignupSchema = Yup.object().shape({
@@ -22,15 +25,27 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const AltaUser = () => {
-
     const navigate = useNavigate();
 
     const handleCancel = () => {
-        console.log("Cancel");
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al crear unusuario',
+            text: error.message || 'Ha ocurrido un error al iniciar sesión',
+        });
         navigate('/');
+
     }
     const handleReset = () => {
         console.log("Reset");
+    };
+    const handleLogin = () => {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Bienvenido!',
+            text: 'Registro de sesión exitoso',
+        });
+        navigate('/');
     };
 
     return (
@@ -44,20 +59,28 @@ export const AltaUser = () => {
                     password: '',
                     repeatPassword: ''
                 }}
-       //         validationSchema={SignupSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                    // Guardar los datos del usuario en localStorage
-                    const userData = {
-                        firstName: values.firstName,
-                        lastName: values.lastName,
-                        email: values.email,
-                        password: values.password,
-                    };
-                    localStorage.setItem('userData', JSON.stringify(userData));
-                    console.log(userData);
-                    alert('Usuario creado con éxito');
-                    navigate('/Login');
-                    setSubmitting(false);
+        validationSchema={SignupSchema}
+                onSubmit={async (values) => {
+                    console.log("values", values);
+                    try {
+                        const { data, error } = await supabase
+                            .from('UserLogin')
+                            .insert([
+                                { firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password, repeatPassword: values.repeatPassword }
+                            ]);
+                        if (error) {
+                            throw new Error(error.message || 'Error al insertar datos del usuario');
+                        }
+                        // @ts-ignore
+                        // if (data && data.length > 0) {
+                        //     const userData = data[0]; // Obtén los datos del primer usuario encontrado
+                        //     console.log('Datos del usuario:', userData);
+                        // } else {
+                        //     throw new Error('Usuario no encontrado en la tabla UserLogin');
+                        // }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
                 }}
             >
                 {({errors, touched}) => (
@@ -93,7 +116,9 @@ export const AltaUser = () => {
                             {errors.password && touched.password ? <div>{errors.password}</div> : null}
                         </div>
                         <div className="btn m-2 p-2">
-                           <button type="submit" className="btn btn-primary m-2">Submit</button>
+                           <button
+                               onClick={handleLogin}
+                               type="submit" className="btn btn-primary m-2">Submit</button>
                             <button
                                 onClick= {handleCancel }
                                 type="button"

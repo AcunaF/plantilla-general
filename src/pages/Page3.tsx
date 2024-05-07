@@ -1,5 +1,5 @@
 import {Col, Row} from 'react-bootstrap';
-import { SearchForm } from '../components/ActivityForm/forms/search-form.jsx';
+import { SaleForm } from '../components/ActivityForm/forms/search-form.tsx';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import company from '../assets/company/imagesCompany.jpeg';
@@ -10,7 +10,7 @@ export const Page3 = () => {
         <div>
 
             <h1>Registra tus productos</h1>
-            <SearchForm/>
+            <SaleForm onReset={undefined}/>
             <Container>
                 <Row>
                     <Col xs={6} md={4}>
@@ -23,7 +23,6 @@ export const Page3 = () => {
                         <Image src={company3} roundedCircle />
                     </Col>
                 </Row>
-
             </Container>
         </div>
     )

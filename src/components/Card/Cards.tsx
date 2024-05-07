@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBRow } from 'mdb-react-ui-kit';
-import Card from 'react-bootstrap/Card';
-
 import './cardsStyles.css';
+import { supabase } from '../../models/supa.connect';
 
 export const Cards = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/galeriaLibro')
-            .then((response) => response.json())
-            .then((dataR) => setData(dataR.items))
-            .catch(err => console.log(`Error`, err));
+        const fetchProducts = async () => {
+            const { data, error } = await supabase
+                .from('Sale_Products')
+                .select('*')
+                .eq('oferta', true);
+
+            if (error) {
+                console.error('Error fetching products: ', error);
+            } else {
+                setData(data)
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     return (
@@ -45,21 +54,6 @@ export const Cards = () => {
                         </MDBCard>
                     </div>
                 ))}
-            </div>
-            <div className="row row-cols-1 row-cols-md-3 g-4">
-            {data.map((item, index) => (
-                <Card key={index} border="dark" style={{ width: '18rem' }}>
-                    <Card.Header>{item.categoria}</Card.Header>
-                    <Card.Body>
-                        <Card.Img variant="top"  src={item.imagen} />
-                        <Card.Title>{item.id_imagen}</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            ))}
             </div>
         </div>
     );

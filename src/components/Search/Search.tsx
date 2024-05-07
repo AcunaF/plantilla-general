@@ -1,41 +1,40 @@
 import React, {useState} from 'react';
-import {FaThumbsUp, FaThumbsDown, FaStar} from 'react-icons/fa';
+import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa';
 import { SlPrinter } from "react-icons/sl";
 import  imagen  from '../../assets//empleados/912265.png';
 import { MdOutlineFavorite } from "react-icons/md";
 import { FaAccessibleIcon } from "react-icons/fa";
-import { FcKindle } from "react-icons/fc";
 import { FcLike } from "react-icons/fc";
-
-
-
-
-import imagencompany from '../../assets//company/imagesCompany.jpeg';
 import imagenGral from '../../assets//company/images-gral.jpeg';
-import imagenMotos from '../../assets//company/images-motos.jpeg';
-import imagenSeguro from '../../assets//company/images-seguro.png';
-import './Search.css';
-import {employees} from '../../data/data.js';
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import {supabase} from "../../models/supa.connect.tsx";
+import './Search.css';
 
 export const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
-
     const [showAlertNofollow, setShowAlertNofollow] = useState(false);
 
-    const handleSearch = () => {
-        const results = employees.employees.filter((employee: { [x: string]: string; }) =>
-            employee['Name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-            employee['Company Name'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-            employee['Category'].toLowerCase().includes(searchTerm.toLowerCase()) ||
-            employee['Happiness level'].toLowerCase().includes(searchTerm.toLowerCase())
-        );
-     console.log("empleados ", employees);
-        setSearchResults(results);
+    const handleSearch = async () => {
+        const { data, error } = await supabase
+            .from('EmployeeRegistration')
+            .select('*')
+            .filter(
+                'Nombre,Apellido,Correo,Telefono,Direccion,Ciudad,Provincia,CodigoPostal,FechaIngreso,Cargo,Salario',
+                'ilike',
+                `%${searchTerm}%`
+            );
+
+        if (error) {
+            console.error('Error fetching employees: ', error);
+        } else {
+            // @ts-ignore
+            setSearchResults(data);
+        }
     }
+
     const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         console.log("event ", event.target.value);
         setSearchTerm(event.target.value);
@@ -91,71 +90,67 @@ export const Search = () => {
                         <strong>Well done!</strong> You have stopped following this employee
                     </div>
                 ) : null}
-                {searchResults.map((employee, index) => (
-                    <div key={index}>
-                        <br/>
-                        <div className="row-cols-2">
-                            <Card
-                                className="card-container float-right"
-                                style={{width: '20rem'}}>
-                                <Card.Img className="mt-2" variant="top" src={imagen}/>
-                                <Card.Body>
-                                    <Card.Title> {employee['Name']}
-                                        &nbsp;
-                                        &nbsp;
+</div>
+                <div className="row">
+                    {searchResults.map((employee, index) => (
+                        <div key={employee.Nombre} className="col-lg-4 col-md-6 mb-4">
+                            <br/>
+                            <div className="row-cols-2">
+                                <Card
+                                    className="d-flex card-container float-right"
+                                    style={{width: '20rem', height: 'auto'}}>
+                                    <Card.Img className="mt-2" variant="top" src={imagen}/>
+                                    <Card.Body>
+                                        <Card.Title> {employee['Nombre']}
+                                            &nbsp;
+                                            &nbsp;
                                             <FaThumbsUp
                                                 type={"button"}
-                                            onClick={handleFollow}
+                                                onClick={handleFollow}
                                             />
-                                        &nbsp;
-                                        &nbsp;
-                                        <FaThumbsDown
-                                        type={"button"}
-                                        onClick={handleDislike}
-                                        />
-                                    </Card.Title>
-                                    <Card.Text>
-                                        <b> Employee description:</b> <br/>
-                                        <span> Confiabilidad. Busca empleados en los que puedas contar para llegar a tiempo y terminar sus tareas. ...
+                                            &nbsp;
+                                            &nbsp;
+                                            <FaThumbsDown
+                                                type={"button"}
+                                                onClick={handleDislike}
+                                            />
+                                        </Card.Title>
+                                        <Card.Link
+                                            className=""
+                                            href="/history">
+                                            <b><FcLike
+                                            /> Happiness History</b> <br/>
+                                            <Card.Link href="/favorites"> <MdOutlineFavorite/><span></span> </Card.Link>
+                                            <Card.Link href="/flollowers"><FaAccessibleIcon/><span></span></Card.Link>
+                                            <Card.Link href="/print"><SlPrinter/> <span></span></Card.Link>
+                                        </Card.Link>
+                                        <Card.Text>
+                                            <b> Employee description:</b> <br/>
+                                            <span> Confiabilidad. Busca empleados en los que puedas contar para llegar a tiempo y terminar sus tareas. ...
                                                     Entrega. ...
                                                         Trabajo en equipo. ...
                                         </span>
-                                    </Card.Text>
-                                    <Card.Link href="/history">
-                                        <b><FcLike
-                                        className=""
-                                        /> Happiness History</b> <br/>
-                                    </Card.Link>
-                                </Card.Body>
-                                <ListGroup className="list-group-flush">
-                                    <ListGroup.Item>Name : {employee['Name']}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item>Category : {employee['Category']}</ListGroup.Item>
-                                    <ListGroup.Item>Happiness level: {employee["Happiness level"]}  </ListGroup.Item>
-                                    <ListGroup.Item>Company Name: {employee['Company Name']} </ListGroup.Item>
-                                    <ListGroup.Item>
-                                        <img src={imagenGral} alt="company" width="250" height="80"/>
-                                    </ListGroup.Item>
-                                </ListGroup>
-                                <Card.Body>
-                                    <Card.Link href="/favorites">
+                                        </Card.Text>
 
-                                        <MdOutlineFavorite/>&nbsp;<span>Favorites</span>
-                                    </Card.Link>
-                                    <Card.Link href="/flollowers"><FaAccessibleIcon />&nbsp;
-                                        <span>Followers</span></Card.Link>
-                                    &nbsp; &nbsp; &nbsp;
-                                    <SlPrinter />
-                                    &nbsp;
-                                    <Card.Link href="/print">
-                                        <span>Print</span>
-                                    </Card.Link>
-                                </Card.Body>
-                            </Card>
+                                    </Card.Body>
+                                    <ListGroup className="list-group-flush"
+                                               style={{width: '20rem', height: 'auto'}}>
+                                        <ListGroup.Item>Name : {employee['Nombre']}
+                                        </ListGroup.Item>
+                                        <ListGroup.Item>Category : {employee['Cargo']}</ListGroup.Item>
+                                        <ListGroup.Item>Happiness
+                                            level: {employee["Happiness level"]}  </ListGroup.Item>
+                                        <ListGroup.Item>Company Name: {employee['Company Name']} </ListGroup.Item>
+                                        <ListGroup.Item>
+                                            <img src={imagenGral} alt="company" width="290" height="150"/>
+                                        </ListGroup.Item>.
+                                    </ListGroup>
+                                </Card>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+
+                </div>
         </form>
     )
 }

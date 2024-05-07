@@ -1,4 +1,4 @@
-import { FaHeart, FaArrowLeft, FaTrash, FaCartPlus } from 'react-icons/fa';
+import { FaArrowLeft, FaTrash, FaCartPlus } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import "./Favorite.css";
@@ -9,7 +9,7 @@ export const Favoritos = () => {
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
-        const storedFavorites = localStorage.getItem("favourites");
+        const storedFavorites = localStorage.getItem("favorites");
         if (storedFavorites) {
             setFavorites(JSON.parse(storedFavorites));
         }
@@ -19,14 +19,14 @@ export const Favoritos = () => {
         navigate("/");
     };
 
-    const handleDelete = (favorite: never) => {
-        const newFavorites = favorites.filter(fav => fav !== favorite);
+    const handleDelete = (favorites: never) => {
+        const newFavorites = favorites.filter((fav: any) => fav !== favorite);
         setFavorites(newFavorites);
         localStorage.setItem("favorite", JSON.stringify(newFavorites));
         alert("Elemento eliminado de favoritos");
     };
 
-    const handleAddtoCart = () => {
+    const handleAddToFavorite = () => {
         alert("Elemento agregado al carrito de compras");
     };
 
@@ -34,16 +34,15 @@ export const Favoritos = () => {
         <div className="favorite-container">
             <h1>Tus Favoritos</h1>
             <div className="container">
-                <Row xs={1} md={4} className="g-4">
-                    {Object.keys(favorites).map((favorite, idx) => (
+                <Row xs={1} md={4} className="container">
+                    {Object.keys(favorites).map((favorites, idx) => (
                         <Col key={idx}>
                             <Card className="card">
-                                <Card.Img variant="top" src={favorite.image}/>
+                                <Card.Img variant="top" src={favorites.image}/> imagen
                                 <Card.Body>
-                                    <Card.Title className="card-title">{favorite.name}</Card.Title>
-                                    <Card.Text className="card-text">
-                                        {favorite.description}
-                                    </Card.Text>
+                                    <Card.Title className="card-title">Name {favorites.name}         </Card.Title>
+                                    <Card.Title className="card-title">Descripcion{favorites.description}         </Card.Title>
+                                    <Card.Text className="card-text">Precio: ${favorites.price}</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -54,7 +53,7 @@ export const Favoritos = () => {
                 <Button variant="secondary" onClick={handleBack}>
                     <FaArrowLeft/> Volver
                 </Button>
-                <Button variant="success" onClick={handleAddtoCart}>
+                <Button variant="success" onClick={handleAddToFavorite}>
                     <FaCartPlus/> Agregar
                 </Button>
                 <Button variant="danger" onClick={handleDelete}>

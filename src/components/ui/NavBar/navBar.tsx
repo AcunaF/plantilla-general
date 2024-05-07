@@ -87,7 +87,7 @@ export const Navbar = () => {
                 </div>
                 <div className="navbar-nav ml-auto">
                     {!isLoggedIn && (
-                        <NavLink className="nav-item nav-link" to="/register">Registrarse</NavLink>
+                        <NavLink className="nav-item nav-link" to="/AltaUser">Registrarse</NavLink>
                     )}
                 </div>
             </nav>

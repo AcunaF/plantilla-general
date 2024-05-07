@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-import { FaSmile, FaMeh, FaFrown } from 'react-icons/fa';
 import Chart from 'chart.js/auto';
 import { SiAlienware } from "react-icons/si";
 import { BsFillEmojiSunglassesFill } from "react-icons/bs";
