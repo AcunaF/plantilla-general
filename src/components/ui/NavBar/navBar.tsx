@@ -69,7 +69,7 @@ export const Navbar = () => {
                     {isLoggedIn ? (
                         <>
                             <NavLink className="nav-item nav-link" to="profile">
-                                {dataUser.email}
+                                {dataUser?.email} {/* Add optional chaining operator here */}
                             </NavLink>
                             <small>
                                 <NavLink className="nav-item nav-link" to="/" onClick={handleLogOut}>

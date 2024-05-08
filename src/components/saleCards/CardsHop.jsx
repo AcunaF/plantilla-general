@@ -13,11 +13,11 @@ export const CardsHop =()=> {
     }, []);
 
     return (
-        <div className="row-cols-2">
+        <div className="row-cols-1">
             {cardsHop.map((item, index) => (
                 <div key={index}>
-                    <MDBCard style={{ maxWidth: '460px' }}>
-                        <MDBRow className="g-1">
+                    <MDBCard style={{ maxWidth: '305px' }}>
+                        <MDBRow className="g-0">
                             <MDBCol>
                                 <MDBCardImage
                                     style={{ maxWidth: '300px' }}

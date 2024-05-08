@@ -26,7 +26,7 @@ export const CardsNew = () => {
     }
 
     return (
-        <div className="row-cols m-0">
+        <div className="row-cols">
             <div className="card-deck row">
                 {currentItems.map((item, index) => {
                     return (

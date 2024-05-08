@@ -23,7 +23,6 @@ import {Contacto} from "../pages/Contacto.jsx";
 import {Favoritos} from "../pages/Favorite/Favoritos.tsx";
 import "../components/ui/NavBar/stylesNav.css";
 import "./Routes.css"
-import {Navbar} from "../components/ui/NavBar/navBar.tsx";
 // @ts-ignore
 import {Register} from "../pages/Register.jsx";
 // @ts-ignore
@@ -35,9 +34,6 @@ import {PopoverTittle} from "../components/Popover/popoverTittle.tsx";
 export const PageRoutes = () => {
     return (
         <AuthProvider>
-            <div>
-                <Navbar/>
-            </div>
             <div className="container">
                 <Routes>
                     <Route path="/" element={<Home/>}/>
