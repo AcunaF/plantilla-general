@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
 import { Nav, NavDropdown} from "react-bootstrap";
+import {SlEnvolope} from "react-icons/sl";
 
 // @ts-ignore
 export const SubNavbar = ({ isLoggedIn }) => {

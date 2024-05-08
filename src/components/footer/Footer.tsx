@@ -35,13 +35,14 @@ export const Footer = () => {
                         </a>
                     </div>
                 </section>
-
                 <section className=''>
                     <MDBContainer className='text-center text-md-start mt-5'>
                         <MDBRow className='mt-3'>
                             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
                                 <h6 className='text-uppercase fw-bold mb-4'>
                                     <MDBIcon icon="gem" className="me-3"/>
+                                    <NavLink className="nav-item nav-link" to="/profile">User profile</NavLink>
+                                    <br/>
                                     <NavLink className="nav-item nav-link" to="/Page2">Employee profile</NavLink>
                                 </h6>
                                 <p>
@@ -49,7 +50,6 @@ export const Footer = () => {
                                     Login to access
                                 </p>
                             </MDBCol>
-
                             <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
                                 <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
                                 <p>
@@ -65,6 +65,11 @@ export const Footer = () => {
                                 <p>
                                     <a href='#!' className='text-reset'>
                                         Node
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href='#!' className='text-reset'>
+                                        NoSql
                                     </a>
                                 </p>
                                 <p>
@@ -88,6 +93,7 @@ export const Footer = () => {
                                 </p>
                             </MDBCol>
                             <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
+                                <div className={"row-cols"}>
                                 <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
                                 <p>
                                     <MDBIcon icon="home" className="me-2"/>
@@ -95,18 +101,17 @@ export const Footer = () => {
                                 </p>
                                 <p>
                                     <MDBIcon icon="envelope" className="me-3"/>
-                                    info@example.com
+                                    facuna30@gmail.com
+                                    <MDBIcon icon="phone" className="me-3"/> +5945494595444
                                 </p>
-                                <p>
-                                    <MDBIcon icon="phone" className="me-3"/> + 01 234 567 88
-                                </p>
+                                </div>
                             </MDBCol>
                         </MDBRow>
                     </MDBContainer>
                 </section>
 
                 <div className='text-center p-4' style={{backgroundColor: 'rgba(0, 0, 0, 0.05)'}}>
-                    © 2021 Copyright:
+                    © 2024 Copyright:
                     <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
                         Facundo Acuña
                     </a>

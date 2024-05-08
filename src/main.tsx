@@ -9,8 +9,6 @@ import ChatBot from "./components/ChatBot/ChatBot.tsx";
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <BrowserRouter>
-            <div>
-            </div>
             <div className="td-container-wrapr">
                 <App/>
             </div>

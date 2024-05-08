@@ -63,7 +63,7 @@ export const AltaUser = () => {
                 onSubmit={async (values) => {
                     console.log("values", values);
                     try {
-                        const { data, error } = await supabase
+                        const {  } = await supabase
                             .from('UserLogin')
                             .insert([
                                 { firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password, repeatPassword: values.repeatPassword }

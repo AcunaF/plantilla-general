@@ -5,6 +5,7 @@ import ButtonComponent from "../buttons/button.tsx";
 import { FaCheckSquare, FaSquare } from 'react-icons/fa';
 
 export const SaleForm = () => {
+    
     const [formData, setFormData] = useState({
         marca: '',
         categoria: '',

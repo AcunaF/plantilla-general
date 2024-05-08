@@ -15,6 +15,7 @@ import {ChatBot} from "../components/ChatBot/ChatBot.tsx";
 import {Search} from "../components/Search/Search.tsx";
 import {ReactQuery} from "../pages/Query/ReactQuery.tsx";
 import {Carrito} from "../components/Carrito/Carrito.tsx";
+import {MyProfile} from "../pages/MyProfile.jsx";
 // @ts-ignore
 import {Employes} from "../components/Employees/Employes.jsx";
 // @ts-ignore
@@ -64,6 +65,7 @@ export const PageRoutes = () => {
                     <Route path={"categorias"} element={<CategoryFiles/>}/>
                     <Route path={"favoritos"} element={<Favoritos/>}/>
                     <Route path={"altaEmpleado"} element={<Employes/>}/>
+                    <Route path={"profile"} element={<MyProfile/>}/>
                     {/**/}
                     <Route path={"popover"} element={<PopoverTittle />} />
                     <Route path={"*"} element={<h1>Not Found</h1>}/>

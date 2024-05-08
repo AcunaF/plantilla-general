@@ -47,15 +47,18 @@ export const LoginForm = () => {
     // @ts-ignore
     const handleLogin = async (values, {setSubmitting}) => {
         try {
-            // @ts-ignore
-            const { user, error } = await supabase.auth.signInWithPassword({ email: values.email, password: values.password });
+            const { data: users, error } = await supabase
+                .from('UserLogin')
+                .select('*')
+                .eq('email', values.email);
 
             if (error) {
                 throw error;
             }
 
-            if (user) {
-                console.log('Datos del usuario:', user);
+            if (users && users.length > 0) {
+                setDataUser(users[0]); // Actualizar dataUser con la información del usuario
+                console.log('Datos del usuario:', users[0]);
                 Swal.fire({
                     icon: 'success',
                     title: '¡Bienvenido!',
@@ -68,7 +71,6 @@ export const LoginForm = () => {
         } catch (error) {
             console.error('Error:', error);
             setAttempts(prevAttempts => prevAttempts - 1);
-            // @ts-ignore
             Swal.fire({
                 icon: 'error',
                 title: 'Error de inicio de sesión',
@@ -77,7 +79,8 @@ export const LoginForm = () => {
         } finally {
             setSubmitting(false);
         }
-    };    return (
+    };
+    return (
         <div className="container">
             <h1>Login</h1>
             <Formik
