@@ -1,6 +1,6 @@
 .card {
-    width: 450px;
-    height: 600px;
+    width: 400px;
+    height: 400px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -20,8 +20,6 @@
     height: auto;
 }
 .text {
-    margin: 5px;
-    padding: 5px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;

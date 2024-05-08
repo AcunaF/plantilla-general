@@ -33,7 +33,6 @@ import {PopoverTittle} from "../components/Popover/popoverTittle.tsx";
 
 export const PageRoutes = () => {
     return (
-        <AuthProvider>
             <div className="container">
                 <Routes>
                     <Route path="/" element={<Home/>}/>
@@ -67,6 +66,5 @@ export const PageRoutes = () => {
                     <Route path={"*"} element={<h1>Not Found</h1>}/>
                 </Routes>
             </div>
-        </AuthProvider>
     );
 };

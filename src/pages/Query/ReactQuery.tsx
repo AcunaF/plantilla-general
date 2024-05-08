@@ -27,7 +27,6 @@ export const ListGroupComponent = () => (
 export const ReactQuery = () => {
 
     const getProducts = () => fetch('https://peticiones.online/api/products').then(response => response.json());
-
     const {data, status} = useQuery('products', getProducts)
 
     switch (status) {

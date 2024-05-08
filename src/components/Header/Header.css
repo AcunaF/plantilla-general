@@ -1,0 +1,10 @@
+.carousel-ofertas {
+    box-shadow: #343a40;
+    margin: 20px 0;
+}
+
+.oferta-item {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 10px;
+}

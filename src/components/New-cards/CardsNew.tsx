@@ -20,36 +20,22 @@ export const CardsNew = () => {
 
     const paginate = (pageNumber: SetStateAction<number>) => setCurrentPage(pageNumber);
 
-    const handleReadMore = (index: number | SetStateAction<null>) => {
-        // @ts-ignore
-        setExpandedCard(expandedCard === index ? null : index);
-    }
-
     return (
         <div className="row-cols">
-            <div className="card-deck row">
+            <div className="">
                 {currentItems.map((item, index) => {
                     return (
-                        <div className={`col-xs-12 col-sm-6 col-md-4 ${expandedCard === index ? 'card-expanded' : 'card'}`} key={index}>
-                            <div className="card w-100">
-                                <div className="view overlay">
+                        <div className={` ${expandedCard === index ? 'card-expanded' : 'card'}`} key={index}>
+                            <div className="">
+                                <div className="">
                                     <img className="card-img-top"
                                          src={item.imagen}
                                          alt="Card image cap"
-                                    style={{
-                                        height: 'auto',
-                                        width: 'auto%', display: 'block'}} />
-                                    <a href="#!">
-                                        <div className="mask rgba-white-slight"></div>
-                                    </a>
+                                     />
                                 </div>
                                 <div className="card-body">
-                                    <h4 className="card-title">{item.id_imagen}</h4>
-                                    <p className={`card-text ${expandedCard === index ? 'text-expanded' : 'text'}`}>{item.web_contenido_imagen}</p>
-                                    <button
-                                        type="button"
-                                        className="btn btn-light-blue btn-md" onClick={() => handleReadMore(index)}>Read more
-                                    </button>
+                                    <h6 className="card-title">{item.categoria}</h6>
+                                    <p className={`card-text ${expandedCard === index ? 'text-expanded' : 'text'}`}>{item.id_imagen}</p>
                                 </div>
                             </div>
                         </div>

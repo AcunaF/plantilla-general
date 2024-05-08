@@ -1,6 +1,5 @@
-
-html,body{
-    padding: 10;
+.html,body{
+    padding: 1px;
     font-family: Arial, sans-serif;
 }
 
@@ -31,4 +30,16 @@ html,body{
         padding: 10px;
     }
     /* Agrega más estilos específicos para móviles aquí */
+}
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row-cols-12 {
+    width: 20%;
+}
+
+.container {
+    width: 100%;
 }
